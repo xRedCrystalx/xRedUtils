@@ -23,14 +23,9 @@ __copyright__ = "Copyright 2024-present xRedCrystalx"
 __version__ = "0.0.0-a1"
 
 from src import *
-import test
+from test import main_test
 
 def check_py_version() -> None | Exception:
     if sys.version_info < (3, 12):
         raise SystemError("Python 3.12 or higher required!")
 check_py_version()
-
-if False:
-    test.main()
-
-del sys, test
