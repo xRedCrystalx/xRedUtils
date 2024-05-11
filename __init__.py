@@ -14,6 +14,7 @@ Usage:
 """
 
 import sys
+sys.dont_write_bytecode = True
 
 __title__ = "RedUtils"
 __author__ = "xRedCrystalx"
@@ -22,10 +23,14 @@ __copyright__ = "Copyright 2024-present xRedCrystalx"
 __version__ = "0.0.0-a1"
 
 from src import *
+from . import test
 
 def check_py_version() -> None | Exception:
     if sys.version_info < (3, 12):
         raise SystemError("Python 3.12 or higher required!")
 check_py_version()
 
-del sys
+if False:
+    test.main()
+
+del sys, test
