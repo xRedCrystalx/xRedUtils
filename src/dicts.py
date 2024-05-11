@@ -1,7 +1,17 @@
 """
-This module provides functions for working with dictionaries and JSON data.
+This module provides functions for working with dictionaries and JSON data, including traversing dictionaries, checking, merging, and converting between dictionaries and JSON.
 
-These functions are useful for navigating and manipulating dictionary-like data structures, especially when dealing with nested structures or JSON data.
+Functions:
+- dict_walk: Recursively walks through a dictionary to retrieve a value specified by a given path.
+- value_exist: Checks whether a value exists within a dictionary at the specified path.
+- dict_merge: Merges two dictionaries.
+- json_to_dict: Converts JSON data to a Python dictionary.
+- dict_to_json: Converts a dictionary to a JSON string with optional indentation and additional keyword arguments.
+
+Usage:
+import red_utils.dicts as dicts
+or
+from red_utils import dicts
 """
 
 import sys, json, io

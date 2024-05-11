@@ -19,7 +19,13 @@ Others:
 - all built-in type dicts without iterables
 - all dicts with built-in type iterables
 
+
+Usage:
+import red_utils.type_hints as type_hints
+or
+from red_utils import type_hints
 """
+
 import sys
 sys.dont_write_bytecode = True
 
