@@ -20,7 +20,7 @@ __title__ = "RedUtils"
 __author__ = "xRedCrystalx"
 __license__ = "MIT"
 __copyright__ = "Copyright 2024-present xRedCrystalx"
-__version__ = "0.0.0-a1"
+__version__ = "0.0.0-a5"
 
 from src import *
 from test import main_test
