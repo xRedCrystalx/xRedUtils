@@ -9,6 +9,7 @@ from src.errors import *
 
 import src.dicts as test_dict
 import src.times as test_time
+import src.sequences as test_sequences
 
 checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
     test_dict.dict_merge: {
@@ -46,6 +47,53 @@ checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
             "d": '{"a": 1, "b": {"b": 10, "c": 30}, "q": "14"}',
         },
         "result": {"a": 1, "b": {"b": 10, "c": 30}, "q": "14"}
+    },
+    test_dict.flatten_dict: {
+        "kwargs": {
+            "dictionary": {"a": 1, "b": {"b": 10, "c": 30, "h": {"l": True}}, "q": "14"}
+        },
+        "result": {"a": 1, "b_b": 10, "b_c": 30, "b_h_l": True, "q": "14"}
+    }, 
+    
+    test_time.convert_to_seconds: {
+        "kwargs": {
+            "value": 23195,
+            "option": "month"
+        },
+        "result": 60121440000
+    },
+    test_time.seconds_to_str: {
+        "kwargs": {
+            "seconds": 3482
+        },
+        "result": "58 minutes, 2 seconds",
+    },
+    test_time.str_to_seconds: {
+        "kwargs": {
+            "time_string": "58 minutes, 2 seconds"
+        },
+        "result": 3482
+    },
+    
+    test_sequences.flatten_sequence: {
+        "kwargs": {
+            "sequence": ["Yes", 5, [True, False, None, [True, True]], ["STR"], 2.123]
+        },
+        "result": ["Yes", 5, True, False, None, True, True, "STR", 2.123]
+    },
+    test_sequences.remove_items: {
+        "kwargs": {
+            "sequence": ["Yes", 5, True, False, None, True, True, "STR", 2.123],
+            "item": True
+        },
+        "result": ["Yes", 5, False, None, "STR", 2.123]
+    },
+    test_sequences.remove_type: {
+        "kwargs": {
+            "sequence": ["Yes", 5, None, None, None, None, None, "STR", 2.123],
+            "obj": type(None)
+        },
+        "result": ["Yes", 5, "STR", 2.123]
     }
 }
 
