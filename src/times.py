@@ -83,10 +83,10 @@ def str_to_seconds(time_string: str, _sep: str = ", ") -> int:
     - The equivalent time duration in seconds as `int`.
     """
     total_seconds = 0
-    components: map[str] = map(str.strip, time_string.split(_sep))
+    components: map[str] = map(str.strip, time_string.split(_sep) or ())
 
     for comp in components:
-        count, unit = comp.split(" ")
-        total_seconds += int(count) * UNITS[unit.strip("s")]
+        count, unit = comp.split(" ") or (0, "second")
+        total_seconds += int(count) * UNITS[unit.rstrip("s")]
 
     return total_seconds
