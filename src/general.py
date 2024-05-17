@@ -1,5 +1,10 @@
 """
 General system information variables
+
+Usage:
+import red_utils.general as general
+or
+from red_utils import general
 """
 
 import sys, os, platform

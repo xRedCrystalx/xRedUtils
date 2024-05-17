@@ -19,7 +19,6 @@ Others:
 - all built-in type dicts without iterables
 - all dicts with built-in type iterables
 
-
 Usage:
 import red_utils.type_hints as type_hints
 or
