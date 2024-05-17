@@ -1,10 +1,11 @@
 """
-This module provides functions for working with dictionaries and JSON data, including traversing dictionaries, checking, merging, and converting between dictionaries and JSON.
+This module provides functions for working with dictionaries and JSON data.
 
 Functions:
 - dict_walk: Recursively walks through a dictionary to retrieve a value specified by a given path.
 - value_exist: Checks whether a value exists within a dictionary at the specified path.
 - dict_merge: Merges two dictionaries.
+- flatten_dict: Flattens a nested dictionary into a single-level dictionary.
 - json_to_dict: Converts JSON data to a Python dictionary.
 - dict_to_json: Converts a dictionary to a JSON string with optional indentation and additional keyword arguments.
 
@@ -78,6 +79,28 @@ def dict_merge(dict1, dict2) -> dict[SIMPLE_ANY, SIMPLE_ANY]:
     """
     return dict1 | dict2
 
+def flatten_dict(dictionary: dict[str, SIMPLE_ANY], _sep: str= "_", _parent_key="") -> dict[str, SIMPLE_ANY]:
+    """
+    Flattens a nested dictionary into a single-level dictionary.
+
+    ### Parameters:
+    - `dictionary` - The dictionary to flatten.
+    - `_sep` - Separator used to join keys in the flattened dictionary (default is "_").
+    - `_parent_key` - Internal parameter used for recursive calls to keep track of parent keys (default is `""`), can be changed, but will only be applied to the first level keys.
+
+    ### Returns:
+    - A single-level `dictionary` where nested keys are joined with the separator.
+    """
+
+    items: dict[str, SIMPLE_ANY] = {}
+    
+    for k, v in dictionary.items():
+        new_key: str = f"{_parent_key}{_sep}{k}" if _parent_key else k
+        if isinstance(v, dict):
+            items.update(flatten_dict(v, _sep=_sep, _parent_key=new_key).items())
+        else:
+            items[new_key] = v
+    return items
 
 def json_to_dict(d: bytes | str | bytearray | io.TextIOWrapper, **kwargs) -> dict[str, SIMPLE_ANY]:
     """
