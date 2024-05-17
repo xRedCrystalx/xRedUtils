@@ -10,6 +10,8 @@ from src.errors import *
 import src.dicts as test_dict
 import src.times as test_time
 import src.sequences as test_sequences
+import src.funcs as test_funcs
+import src.dates as test_dates
 
 checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
     test_dict.dict_merge: {
@@ -94,6 +96,24 @@ checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
             "obj": type(None)
         },
         "result": ["Yes", 5, "STR", 2.123]
+    },
+
+    test_funcs.safe_call: {
+        "kwargs": {
+            "func": list,
+            "_error": "full"
+        },
+        "result": []
+    },
+
+    test_dates.get_datetime: {
+        "result": test_dates.datetime.datetime.now()
+    },
+    test_dates.timestamp: {
+        "kwargs": {
+            "dt": test_dates.datetime.datetime.now()
+        },
+        "result": int(test_dates.time.time())
     }
 }
 
@@ -113,14 +133,16 @@ def main_test() -> None:
         total: int = len(checks)
         print(f"Completed {total-fails}/{total}.")
 
-def runner(func: typing.Callable, result: SIMPLE_ANY, *args, **kwargs) -> bool:
+def runner(_f: typing.Callable, result: SIMPLE_ANY, *args, **kwargs) -> bool:
     try:
-        response: SIMPLE_ANY = func(*args, **kwargs)
-        if response == result:
+        response: SIMPLE_ANY = _f(*args, **kwargs)
+        if result == "*" or response == result:
             return True
         
         print(f"Got: {response}\nExpected: {result}")
 
-    except Exception as error:
+    except Exception:
         print(full_traceback())
     return False
+
+main_test()
