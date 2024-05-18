@@ -28,11 +28,20 @@ Issues = "https://github.com/xRedCrystalx/RedUtils/issues"
 [tool.setuptools.dynamic]
 dependencies = { file = "requirements.txt" }
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["xRedUtils"]
+exclude = ["TODO"]
+
 [tool.pyright]
 exclude = [
-    "TODO",
-    "dist",
-    "docs",
+    "TODO/",
+    "dist/",
+    "docs/"
+]
+include = [
+    "xRedUtils",
+    "xRedUtils/test"
 ]
 
 reportUnnecessaryTypeIgnoreComment = "warning"
