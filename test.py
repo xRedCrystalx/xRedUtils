@@ -6,12 +6,15 @@ import sys, typing
 sys.dont_write_bytecode = True
 from src.type_hints import *
 from src.errors import *
+from src.regexes import *
+from src.general import *
 
 import src.dicts as test_dict
 import src.times as test_time
 import src.sequences as test_sequences
 import src.funcs as test_funcs
 import src.dates as test_dates
+import src.maths as test_maths
 
 checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
     test_dict.dict_merge: {
@@ -114,6 +117,29 @@ checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
             "dt": test_dates.datetime.datetime.now()
         },
         "result": int(test_dates.time.time())
+    },
+
+    test_maths.root: {
+        "kwargs": {
+            "value": 81,
+            "n": 4
+        },
+        "result": 3
+    },
+    test_maths.percentage_difference: {
+        "kwargs": {
+            "num1": 100,
+            "num2": 30,
+            "_resp": "decimal"
+        },
+        "result": 0.7
+    },
+    test_maths.value_from_percentage: {
+        "kwargs": {
+            "total": 100,
+            "percentage": 25
+        },
+        "result": 25
     }
 }
 
@@ -130,8 +156,11 @@ def main_test() -> None:
             print(f"Failed to run: {func.__qualname__}")
             fails += 1
     else:
-        total: int = len(checks)
-        print(f"Completed {total-fails}/{total}.")
+        if not fails:
+            print("All checks passed!")
+        else:
+            total: int = len(checks)
+            print(f"Completed {total-fails}/{total}.")
 
 def runner(_f: typing.Callable, result: SIMPLE_ANY, *args, **kwargs) -> bool:
     try:
