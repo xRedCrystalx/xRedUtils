@@ -14,7 +14,7 @@ from xRedUtils import errors
 import sys, traceback
 sys.dont_write_bytecode = True
 
-from type_hints import SIMPLE_ANY
+from .type_hints import SIMPLE_ANY
 
 
 def full_traceback() -> str:

@@ -16,8 +16,8 @@ import sys
 sys.dont_write_bytecode = True
 from typing import Literal
 
-from type_hints import NUMBER
-from errors import InvalidRootError
+from .type_hints import NUMBER
+from .errors import InvalidRootError
 
 def root(value: NUMBER, n: int) -> NUMBER:
     """

@@ -18,7 +18,7 @@ from xRedUtils import dicts
 import sys, json, io
 sys.dont_write_bytecode = True
 
-from type_hints import SIMPLE_ANY
+from .type_hints import SIMPLE_ANY
 
 def dict_walk(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], path: str | list[str], _sep: str = ".", _slice: slice = slice(None, None)) -> dict[SIMPLE_ANY, SIMPLE_ANY]:
     """

@@ -16,7 +16,7 @@ from xRedUtils import sequences
 import sys
 sys.dont_write_bytecode = True
 
-from type_hints import SIMPLE_ANY, ITERABLE
+from .type_hints import SIMPLE_ANY, ITERABLE
 
 def flatten_sequence(sequence: ITERABLE) -> list[SIMPLE_ANY]:
     """

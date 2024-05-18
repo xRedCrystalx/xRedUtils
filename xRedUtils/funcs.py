@@ -12,10 +12,10 @@ from xRedUtils import funcs
 
 import sys
 sys.dont_write_bytecode = True
-
-from type_hints import SIMPLE_ANY
-from errors import full_traceback, simple_error
 from typing import Callable, Literal
+
+from .type_hints import SIMPLE_ANY
+from .errors import full_traceback, simple_error
 
 def safe_call(func: Callable, args: tuple | list = None, kwargs: dict[str, SIMPLE_ANY] = None, _default: SIMPLE_ANY = None, _error: Literal["simple", "full"] = "simple") -> SIMPLE_ANY:
     """

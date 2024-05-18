@@ -19,7 +19,7 @@ from xRedUtils import times
 import sys, typing
 sys.dont_write_bytecode = True
 
-from type_hints import NUMBER_DICT, NUMBER
+from .type_hints import NUMBER_DICT, NUMBER
 
 
 UNITS: NUMBER_DICT = {
