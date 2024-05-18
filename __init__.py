@@ -20,12 +20,12 @@ __title__ = "RedUtils"
 __author__ = "xRedCrystalx"
 __license__ = "MIT"
 __copyright__ = "Copyright 2024-present xRedCrystalx"
-__version__ = "0.0.0-a5"
+__version__ = "0.0.1"
 
 from src import *
 from test import main_test
 
-def check_py_version() -> None | Exception:
+def check_py_version() -> None | SystemError:
     if sys.version_info < (3, 12):
         raise SystemError("Python 3.12 or higher required!")
 check_py_version()
