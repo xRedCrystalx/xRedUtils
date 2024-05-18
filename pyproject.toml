@@ -27,3 +27,14 @@ Issues = "https://github.com/xRedCrystalx/RedUtils/issues"
 
 [tool.setuptools.dynamic]
 dependencies = { file = "requirements.txt" }
+
+[tool.pyright]
+exclude = [
+    "TODO",
+    "dist",
+    "docs",
+]
+
+reportUnnecessaryTypeIgnoreComment = "warning"
+reportUnusedImport = "error"
+typeCheckingMode = "basic"
