@@ -1,10 +1,11 @@
 """
-This module provides utilities for manipulating sequences.
+This module provides utilities for manipulating with sequences.
 
 Functions:
 - flatten_sequence: Flattens a sequence into a single level list.
 - remove_items: Removes all occurrences of a specified item from the sequence.
 - remove_type: Removes all items of a specified type from the sequence.
+- compare_sequences: Compare two sequences and return a list of items that are present in both sequences.
 
 Usage:
 import red_utils.sequences as sequences
@@ -70,3 +71,16 @@ def remove_type(sequence: ITERABLE, obj: type) -> list[SIMPLE_ANY]:
     - A new list with items of the specified type removed.
     """
     return [x for x in sequence if not isinstance(x, obj)]
+
+def compare_sequences(sequence1: ITERABLE, sequence2: ITERABLE) -> list[SIMPLE_ANY]:
+    """
+    Compare two sequences and return a list of items that are present in both sequences.
+    
+    ### Parameters:
+    - `sequence1` - The first sequence to compare.
+    - `sequence2` - The second sequence to compare.
+    
+    ### Returns:
+    -  A `list` of items present in both sequences.
+    """
+    return [item for item in sequence1 if item in sequence2]
