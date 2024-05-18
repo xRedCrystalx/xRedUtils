@@ -8,15 +8,15 @@ Functions:
 - compare_sequences: Compare two sequences and return a list of items that are present in both sequences.
 
 Usage:
-import red_utils.sequences as sequences
+import xRedUtils.sequences as sequences
 or
-from red_utils import sequences
+from xRedUtils import sequences
 """
 
 import sys
 sys.dont_write_bytecode = True
 
-from .type_hints import SIMPLE_ANY, ITERABLE
+from type_hints import SIMPLE_ANY, ITERABLE
 
 def flatten_sequence(sequence: ITERABLE) -> list[SIMPLE_ANY]:
     """

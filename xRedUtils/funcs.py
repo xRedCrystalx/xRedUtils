@@ -5,16 +5,16 @@ Functions:
 - safe_call: Safely calls a function with given arguments and keyword arguments.
 
 Usage:
-import red_utils.funcs as funcs
+import xRedUtils.funcs as funcs
 or
-from red_utils import funcs
+from xRedUtils import funcs
 """
 
 import sys
 sys.dont_write_bytecode = True
 
-from .type_hints import SIMPLE_ANY
-from .errors import full_traceback, simple_error
+from type_hints import SIMPLE_ANY
+from errors import full_traceback, simple_error
 from typing import Callable, Literal
 
 def safe_call(func: Callable, args: tuple | list = None, kwargs: dict[str, SIMPLE_ANY] = None, _default: SIMPLE_ANY = None, _error: Literal["simple", "full"] = "simple") -> SIMPLE_ANY:

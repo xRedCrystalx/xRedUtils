@@ -11,15 +11,15 @@ Constants:
 - OPTIONS: Literal type containing valid time unit options for conversion.
 
 Usage:
-import red_utils.times as times
+import xRedUtils.times as times
 or
-from red_utils import times
+from xRedUtils import times
 """
 
 import sys, typing
 sys.dont_write_bytecode = True
 
-from .type_hints import NUMBER_DICT, NUMBER
+from type_hints import NUMBER_DICT, NUMBER
 
 
 UNITS: NUMBER_DICT = {

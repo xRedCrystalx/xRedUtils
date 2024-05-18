@@ -4,17 +4,17 @@ WIP
 """
 import sys, typing
 sys.dont_write_bytecode = True
-from src.type_hints import *
-from src.errors import *
-from src.regexes import *
-from src.general import *
+from xRedUtils.type_hints import *
+from xRedUtils.errors import *
+from xRedUtils.regexes import *
+from xRedUtils.general import *
 
-import src.dicts as test_dict
-import src.times as test_time
-import src.sequences as test_sequences
-import src.funcs as test_funcs
-import src.dates as test_dates
-import src.maths as test_maths
+import xRedUtils.dicts as test_dict
+import xRedUtils.times as test_time
+import xRedUtils.sequences as test_sequences
+import xRedUtils.funcs as test_funcs
+import xRedUtils.dates as test_dates
+import xRedUtils.maths as test_maths
 
 checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
     test_dict.dict_merge: {
@@ -146,13 +146,7 @@ checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
 def main_test() -> None:
     fails: int = 0
     for func, data in checks.items():
-        if not data.get("args"):
-            data["args"] = ()
-        
-        if not data.get("kwargs"):
-            data["kwargs"] = {}
-
-        if not runner(func, data["result"], *data["args"], **data["kwargs"]):
+        if not runner(func, data["result"], *data.get("args", []), **data.get("kwargs", {})):
             print(f"Failed to run: {func.__qualname__}")
             fails += 1
     else:

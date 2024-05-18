@@ -6,9 +6,9 @@ Functions:
 - timestamp: Converts a datetime object to a UNIX timestamp.
 
 Usage:
-import red_utils.dates as dates
+import xRedUtils.dates as dates
 or
-from red_utils import dates
+from xRedUtils import dates
 """
 
 import sys, datetime, time

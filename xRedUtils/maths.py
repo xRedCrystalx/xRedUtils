@@ -7,17 +7,17 @@ Functions:
 - value_from_percentage: Calculates the value corresponding to a given percentage of a total.
 
 Usage:
-import red_utils.maths as maths
+import xRedUtils.maths as maths
 or
-from red_utils import maths
+from xRedUtils import maths
 """
 
 import sys
 sys.dont_write_bytecode = True
 from typing import Literal
 
-from .type_hints import NUMBER
-from .errors import InvalidRootError
+from type_hints import NUMBER
+from errors import InvalidRootError
 
 def root(value: NUMBER, n: int) -> NUMBER:
     """

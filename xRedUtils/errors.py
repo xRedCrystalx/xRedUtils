@@ -6,15 +6,15 @@ Functions:
 - simple_error: Formats a simple error message for an exception.
 
 Usage:
-import red_utils.errors as errors
+import xRedUtils.errors as errors
 or
-from red_utils import errors
+from xRedUtils import errors
 """
 
 import sys, traceback
 sys.dont_write_bytecode = True
 
-from .type_hints import SIMPLE_ANY
+from type_hints import SIMPLE_ANY
 
 
 def full_traceback() -> str:

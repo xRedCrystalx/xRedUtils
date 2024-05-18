@@ -10,15 +10,15 @@ Functions:
 - dict_to_json: Converts a dictionary to a JSON string with optional indentation and additional keyword arguments.
 
 Usage:
-import red_utils.dicts as dicts
+import xRedUtils.dicts as dicts
 or
-from red_utils import dicts
+from xRedUtils import dicts
 """
 
 import sys, json, io
 sys.dont_write_bytecode = True
 
-from .type_hints import SIMPLE_ANY
+from type_hints import SIMPLE_ANY
 
 def dict_walk(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], path: str | list[str], _sep: str = ".", _slice: slice = slice(None, None)) -> dict[SIMPLE_ANY, SIMPLE_ANY]:
     """

@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "RedUtils"
+name = "xRedUtils"
 version = "0.0.1"
 authors = [{ name="xRedCrystalx" }]
 description = "Simple, general purpose functions in one place!"

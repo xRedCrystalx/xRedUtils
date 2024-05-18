@@ -1,5 +1,10 @@
 """
 Module with compiled useful regexes
+
+Usage:
+import xRedUtils.regexes as regexes
+or
+from xRedUtils import regexes
 """
 
 import sys, re

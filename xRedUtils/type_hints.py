@@ -20,9 +20,9 @@ Others:
 - all dicts with built-in type iterables
 
 Usage:
-import red_utils.type_hints as type_hints
+import xRedUtils.type_hints as type_hints
 or
-from red_utils import type_hints
+from xRedUtils import type_hints
 """
 
 import sys
