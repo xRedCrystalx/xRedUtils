@@ -65,8 +65,8 @@ def value_from_percentage(total: NUMBER, percentage: NUMBER) -> NUMBER:
     Calculates the value corresponding to a given percentage of a total.
 
     ### Parameters:
-    `total` - The total or whole amount.
-    `percentage` - The percentage of the total.
+    - `total` - The total or whole amount.
+    - `percentage` - The percentage of the total.
 
     ### Returns:
     - The value that corresponds to the given percentage of the total.
