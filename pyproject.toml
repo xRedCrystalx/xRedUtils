@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "RedUtils"
+version = "0.0.1"
+authors = [{ name="xRedCrystalx" }]
+description = "Simple, general purpose functions in one place!"
+requires-python = ">=3.12"
+
+classifiers = [
+    "Natural Language :: English",
+    "Intended Audience :: Developers",
+
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Typing :: Typed",
+
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://github.com/xRedCrystalx/RedUtils"
+Issues = "https://github.com/xRedCrystalx/RedUtils/issues"
+
+[tool.setuptools.dynamic]
+dependencies = { file = "requirements.txt" }
