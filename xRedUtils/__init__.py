@@ -29,11 +29,12 @@ import xRedUtils.funcs as functions
 import xRedUtils.general as general
 import xRedUtils.maths as maths
 import xRedUtils.regexes as regex
-import xRedUtils.sequences as sequences
+import xRedUtils.iterables as iterables
 import xRedUtils.times as time
 import xRedUtils.type_hints as typehints
+import xRedUtils.strings as strings
 
-from test.test import main_test
+from xRedUtils.test.test import main_test
 
 def check_py_version() -> None | SystemError:
     if sys.version_info < (3, 12):
