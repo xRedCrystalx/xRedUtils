@@ -1,20 +1,19 @@
 """
 Main testing module
-WIP
 """
+
 import sys, typing
 sys.dont_write_bytecode = True
-from xRedUtils.type_hints import *
-from xRedUtils.errors import *
-from xRedUtils.regexes import *
-from xRedUtils.general import *
+from xRedUtils.type_hints import SIMPLE_ANY
+from xRedUtils.errors import full_traceback
 
 import xRedUtils.dicts as test_dict
 import xRedUtils.times as test_time
-import xRedUtils.sequences as test_sequences
+import xRedUtils.iterables as test_iterables
 import xRedUtils.funcs as test_funcs
 import xRedUtils.dates as test_dates
 import xRedUtils.maths as test_maths
+import xRedUtils.strings as test_strings
 
 checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
     test_dict.dict_merge: {
@@ -80,22 +79,22 @@ checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
         "result": 3482
     },
     
-    test_sequences.flatten_sequence: {
+    test_iterables.flatten_iterable: {
         "kwargs": {
-            "sequence": ["Yes", 5, [True, False, None, [True, True]], ["STR"], 2.123]
+            "iterable": ["Yes", 5, [True, False, None, [True, True]], ["STR"], 2.123]
         },
         "result": ["Yes", 5, True, False, None, True, True, "STR", 2.123]
     },
-    test_sequences.remove_items: {
+    test_iterables.remove_items: {
         "kwargs": {
-            "sequence": ["Yes", 5, True, False, None, True, True, "STR", 2.123],
+            "iterable": ["Yes", 5, True, False, None, True, True, "STR", 2.123],
             "item": True
         },
         "result": ["Yes", 5, False, None, "STR", 2.123]
     },
-    test_sequences.remove_type: {
+    test_iterables.remove_type: {
         "kwargs": {
-            "sequence": ["Yes", 5, None, None, None, None, None, "STR", 2.123],
+            "iterable": ["Yes", 5, None, None, None, None, None, "STR", 2.123],
             "obj": type(None)
         },
         "result": ["Yes", 5, "STR", 2.123]
@@ -140,6 +139,21 @@ checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
             "percentage": 25
         },
         "result": 25
+    },
+
+    test_strings.string_split: {
+        "kwargs": {
+            "string": "This is a sample string to be split every nth character intelligently.",
+            "chunk_size": 20,
+            "option": "smart"
+        },
+        "result": ['This is a sample', 'string to be split', 'every nth character', 'intelligently.']
+    },
+    test_strings.pluralize: {
+        "kwargs": {
+            "singular": "ferrule"
+        },
+        "result": "ferrules"
     }
 }
 
@@ -161,11 +175,9 @@ def runner(_f: typing.Callable, result: SIMPLE_ANY, *args, **kwargs) -> bool:
         response: SIMPLE_ANY = _f(*args, **kwargs)
         if result == "*" or response == result:
             return True
-        
+
         print(f"Got: {response}\nExpected: {result}")
 
     except Exception:
         print(full_traceback())
     return False
-
-main_test()
