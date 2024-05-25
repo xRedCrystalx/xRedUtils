@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "xRedUtils"
-version = "0.0.1"
+version = "0.1.0"
 authors = [{ name="xRedCrystalx" }]
 description = "Simple, general purpose functions in one place!"
 requires-python = ">=3.12"
@@ -25,25 +25,10 @@ classifiers = [
 Homepage = "https://github.com/xRedCrystalx/RedUtils"
 Issues = "https://github.com/xRedCrystalx/RedUtils/issues"
 
-[tool.setuptools.dynamic]
-dependencies = { file = "requirements.txt" }
-
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["xRedUtils"]
-exclude = ["TODO"]
-
-[tool.pyright]
-exclude = [
-    "TODO/",
-    "dist/",
-    "docs/"
-]
 include = [
-    "xRedUtils",
-    "xRedUtils/test"
+    "xRedUtils", 
+    "xRedUtils.test",
 ]
-
-reportUnnecessaryTypeIgnoreComment = "warning"
-reportUnusedImport = "error"
-typeCheckingMode = "basic"
+exclude = ["TODO"]
