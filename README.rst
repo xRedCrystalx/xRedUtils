@@ -1,4 +1,3 @@
-=========
 xRedUtils
 =========
 
@@ -9,7 +8,7 @@ This is a simple library with many functions and modules that I normally use in 
 Instalation
 -----------
 
-.. code-block::
+.. code-block:: sh
 
     pip install xRedUtils
 
@@ -23,14 +22,16 @@ Usage
 
 Output:
 
-.. code-block::
+.. code-block:: sh
 
     All checks passed!
 
 Documentation
 -------------
-WIP - Still trying to figure this out, for now, every function has ``docstring``
+
+WIP - Still trying to figure this out, for now, every function has ``docstring``.
 
 License
 -------
-MIT License - `Here!<https://github.com/xRedCrystalx/xRedUtils/tree/main/LICENSE>`_
+
+MIT License - `Here! <https://github.com/xRedCrystalx/xRedUtils/tree/main/LICENSE>`_
