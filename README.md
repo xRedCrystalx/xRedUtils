@@ -1,4 +1,4 @@
-# RedUtils
+# xRedUtils
 ### General useful python functions
 
 This is a simple library with many functions and modules that I normally use in my projects.
