@@ -1,5 +1,5 @@
 """
-## RedUtils Python Library
+## xRedUtils Python Library
 ────────────────────────────────────────────────\n
 Simple, general purpose functions in one place! 
 
@@ -41,3 +41,5 @@ def check_py_version() -> None | SystemError:
     if sys.version_info < (3, 12):
         raise SystemError("Python 3.12 or higher required!")
 check_py_version()
+
+del sys

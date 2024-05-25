@@ -2,9 +2,9 @@
 This module provides mathematics functions.
 
 ### Functions:
-- root: Computes the n-th root of a given value.
-- percentage_difference: Calculates the percentage difference between two numbers.
-- value_from_percentage: Calculates the value corresponding to a given percentage of a total.
+- `root` - Computes the n-th root of a given value.
+- `percentage_difference` - Calculates the percentage difference between two numbers.
+- `value_from_percentage` - Calculates the value corresponding to a given percentage of a total.
 
 ### Usage:
 ```py

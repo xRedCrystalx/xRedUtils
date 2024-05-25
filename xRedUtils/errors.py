@@ -2,8 +2,8 @@
 This module provides functions for generating error messages.
 
 ### Functions:
-- full_traceback: Generates a full traceback of the current exception as a string.
-- simple_error: Formats a simple error message for an exception.
+- `full_traceback` - Generates a full traceback of the current exception as a string.
+- `simple_error` -  Formats a simple error message for an exception.
 
 ### Usage:
 ```py

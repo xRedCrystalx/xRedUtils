@@ -2,8 +2,8 @@
 This module provides datetime handlers.
 
 ### Functions:
-- get_datetime: Get the current datetime.
-- timestamp: Converts a datetime object to a UNIX timestamp.
+- `get_datetime` - Get the current datetime.
+- `timestamp` - Converts a datetime object to a UNIX timestamp.
 
 ### Usage:
 ```py
@@ -36,10 +36,10 @@ def timestamp(dt: datetime.datetime) -> int:
     Converts a datetime object to a UNIX timestamp.
 
     ### Parameters:
-        - `dt` - The datetime object to convert.
+    - `dt` - The datetime object to convert.
 
     ### Returns:
-        The UNIX timestamp corresponding to the input datetime in `int`.
+    The UNIX timestamp corresponding to the input datetime in `int`.
     """
     if dt and isinstance(dt, datetime.datetime):
         return int(datetime.datetime.timestamp(dt))

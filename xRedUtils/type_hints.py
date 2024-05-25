@@ -1,16 +1,16 @@
 """
 Most of the important typehints.
 
-Use ANY, ITERABLE_OF_ANYTHING and DICT_OF_ANYTHING with your own risk. (It might slow down your computer and break InteliSense)
+Use `ANY`, `ITERABLE_OF_ANYTHING` and `DICT_OF_ANYTHING` with your own risk. (It might slow down your computer and break InteliSense)
 
 ### Recommended:
-- SIMPLE_ANY
+- `SIMPLE_ANY`
 
 ### Commonly used:
-- BUILTINS - all built-in types without iterables or mappings
-- NUMBER - all numerical types
-- BINARY - binary types - bytes, memoryviews etc.
-- ITERABLE - all built-in types that can be iterated (in for loop)
+- `BUILTINS` - all built-in types without iterables or mappings
+- `NUMBER` - all numerical types
+- `BINARY` - binary types - bytes, memoryviews etc.
+- `ITERABLE` - all built-in types that can be iterated (in for loop)
 
 ### Others:
 - all built-in type iterables
@@ -21,9 +21,9 @@ Use ANY, ITERABLE_OF_ANYTHING and DICT_OF_ANYTHING with your own risk. (It might
 
 ### Usage:
 ```py
-import xRedUtils.type_hints as type_hints
+import xRedUtils.typehints as typehints
 or
-from xRedUtils import type_hints
+from xRedUtils import typehints
 ```
 """
 

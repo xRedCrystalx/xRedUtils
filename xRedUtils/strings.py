@@ -2,8 +2,8 @@
 This module provides string functions.
 
 ### Functions:
-- pluralize: Pluralizes a given singular word.
-- string_split: Splits a string into chunks of specified size.
+- `pluralize` - Pluralizes a given singular word.
+- `string_split` - Splits a string into chunks of specified size.
 
 ### Usage:
 ```py

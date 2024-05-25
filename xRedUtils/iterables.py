@@ -2,11 +2,11 @@
 This module provides utilities for manipulating with iterables.
 
 ### Functions:
-- flatten_iterable: Flattens a iterable into a single level list.
-- remove_items: Removes all occurrences of a specified item from the iterable.
-- remove_type: Removes all items of a specified type from the iterable.
-- compare_iterables: Compare two iterables and return a list of items that are present in both iterables.
-- count_occurrences: Count the number of times a specific item occurs in an iterable.
+- `flatten_iterable` - Flattens a iterable into a single level list.
+- `remove_items` - Removes all occurrences of a specified item from the iterable.
+- `remove_type` - Removes all items of a specified type from the iterable.
+- `compare_iterables` - Compare two iterables and return a list of items that are present in both iterables.
+- `count_occurrences` - Count the number of times a specific item occurs in an iterable.
 
 ### Usage:
 ```py

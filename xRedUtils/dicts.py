@@ -2,12 +2,12 @@
 This module provides functions for working with dictionaries and JSON data.
 
 ### Functions:
-- dict_walk: Recursively walks through a dictionary to retrieve a value specified by a given path.
-- value_exist: Checks whether a value exists within a dictionary at the specified path.
-- dict_merge: Merges two dictionaries.
-- flatten_dict: Flattens a nested dictionary into a single-level dictionary.
-- json_to_dict: Converts JSON data to a Python dictionary.
-- dict_to_json: Converts a dictionary to a JSON string with optional indentation and additional keyword arguments.
+- `dict_walk` - Recursively walks through a dictionary to retrieve a value specified by a given path.
+- `value_exist` - Checks whether a value exists within a dictionary at the specified path.
+- `dict_merge` - Merges two dictionaries.
+- `flatten_dict` - Flattens a nested dictionary into a single-level dictionary.
+- `json_to_dict` - Converts JSON data to a Python dictionary.
+- `dict_to_json` - Converts a dictionary to a JSON string with optional indentation and additional keyword arguments.
 
 ### Usage:
 ```py
@@ -22,7 +22,7 @@ sys.dont_write_bytecode = True
 
 from .type_hints import SIMPLE_ANY
 
-def dict_walk(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], path: str | list[str], _sep: str = ".", _slice: slice = slice(None, None)) -> dict[SIMPLE_ANY, SIMPLE_ANY]:
+def dict_walk(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], path: str | list[str], _sep: str = ".", _slice: slice = slice(None, None)) -> SIMPLE_ANY:
     """
     Recursively walks through a dictionary to retrieve a value specified by a given path.
 
