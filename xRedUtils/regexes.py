@@ -1,10 +1,12 @@
 """
 Module with compiled useful regexes
 
-Usage:
+### Usage:
+```py
 import xRedUtils.regexes as regexes
 or
 from xRedUtils import regexes
+```
 """
 
 import sys, re

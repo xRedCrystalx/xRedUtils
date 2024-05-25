@@ -1,14 +1,16 @@
 """
 This module provides string functions.
 
-Functions:
+### Functions:
 - pluralize: Pluralizes a given singular word.
 - string_split: Splits a string into chunks of specified size.
 
-Usage:
+### Usage:
+```py
 import xRedUtils.strings as strings
 or
 from xRedUtils import strings
+```
 """
 
 import sys

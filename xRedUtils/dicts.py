@@ -1,7 +1,7 @@
 """
 This module provides functions for working with dictionaries and JSON data.
 
-Functions:
+### Functions:
 - dict_walk: Recursively walks through a dictionary to retrieve a value specified by a given path.
 - value_exist: Checks whether a value exists within a dictionary at the specified path.
 - dict_merge: Merges two dictionaries.
@@ -9,10 +9,12 @@ Functions:
 - json_to_dict: Converts JSON data to a Python dictionary.
 - dict_to_json: Converts a dictionary to a JSON string with optional indentation and additional keyword arguments.
 
-Usage:
+### Usage:
+```py
 import xRedUtils.dicts as dicts
 or
 from xRedUtils import dicts
+```
 """
 
 import sys, json, io

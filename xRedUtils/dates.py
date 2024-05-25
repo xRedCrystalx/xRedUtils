@@ -1,14 +1,16 @@
 """
 This module provides datetime handlers.
 
-Functions:
+### Functions:
 - get_datetime: Get the current datetime.
 - timestamp: Converts a datetime object to a UNIX timestamp.
 
-Usage:
+### Usage:
+```py
 import xRedUtils.dates as dates
 or
 from xRedUtils import dates
+```
 """
 
 import sys, datetime, time

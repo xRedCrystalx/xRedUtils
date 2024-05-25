@@ -3,26 +3,28 @@ Most of the important typehints.
 
 Use ANY, ITERABLE_OF_ANYTHING and DICT_OF_ANYTHING with your own risk. (It might slow down your computer and break InteliSense)
 
-Recommended:
+### Recommended:
 - SIMPLE_ANY
 
-Commonly used:
+### Commonly used:
 - BUILTINS - all built-in types without iterables or mappings
 - NUMBER - all numerical types
 - BINARY - binary types - bytes, memoryviews etc.
 - ITERABLE - all built-in types that can be iterated (in for loop)
 
-Others:
+### Others:
 - all built-in type iterables
 - all iterables with built-in type dicts
 
 - all built-in type dicts without iterables
 - all dicts with built-in type iterables
 
-Usage:
+### Usage:
+```py
 import xRedUtils.type_hints as type_hints
 or
 from xRedUtils import type_hints
+```
 """
 
 import sys

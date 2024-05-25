@@ -1,13 +1,15 @@
 """
 This module provides functions to deal with functions. Yeah makes no sense.
 
-Functions:
+### Functions:
 - safe_call: Safely calls a function with given arguments and keyword arguments.
 
-Usage:
+### Usage:
+```py
 import xRedUtils.funcs as funcs
 or
 from xRedUtils import funcs
+```
 """
 
 import sys

@@ -1,19 +1,21 @@
 """
 This module provides functions for converting time values between different units and formats.
 
-Functions:
+### Functions:
 - convert_to_seconds: Converts a time value from a specified unit to seconds.
 - seconds_to_str: Converts a time duration in seconds to a human-readable string format.
 - str_to_seconds: Converts a human-readable time string to its equivalent duration in seconds.
 
-Constants:
+### Constants:
 - UNITS: A dictionary mapping time units to their conversion factors in seconds.
 - OPTIONS: Literal type containing valid time unit options for conversion.
 
-Usage:
+### Usage:
+```py
 import xRedUtils.times as times
 or
 from xRedUtils import times
+```
 """
 
 import sys, typing

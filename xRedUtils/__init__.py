@@ -1,13 +1,14 @@
 """
-RedUtils Python Library
-────────────────────────────────────────────────
+## RedUtils Python Library
+────────────────────────────────────────────────\n
 Simple, general purpose functions in one place! 
 
-Usage:
-
+### Usage:
+```py
 >>> import xRedUtils
 >>> xRedUtils.main_test()
 "All checks passed!"
+```
 
 :copyright: (c) 2024 by xRedCrystalx.
 :license: MIT, see LICENSE for more details.

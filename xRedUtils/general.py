@@ -1,10 +1,12 @@
 """
 General system information variables
 
-Usage:
+### Usage:
+```py
 import xRedUtils.general as general
 or
 from xRedUtils import general
+```
 """
 
 import sys, os, platform
