@@ -38,7 +38,7 @@ WIN_IOT: bool = platform.win32_is_iot()
 
 CPU_COUNT: int | None = os.cpu_count()
 PROCESSOR_NAME: str = platform.processor()
-DRIVES: list[str] = os.listdrives()
+DRIVES: list[str] = os.listdrives() if OS == "Windows" else []
 
 CWD: str = os.getcwd()
 RECURSION_LIMIT: int = sys.getrecursionlimit()
