@@ -21,7 +21,13 @@ __title__ = "RedUtils"
 __author__ = "xRedCrystalx"
 __license__ = "MIT"
 __copyright__ = "Copyright 2024-present xRedCrystalx"
-__version__ = "0.0.1"
+__version__ = "0.0.3"
+
+def check_py_version() -> None | SystemError:
+    if sys.version_info < (3, 12):
+        raise SystemError("Python 3.12 or higher required!")
+
+check_py_version()
 
 import xRedUtils.dates as dates
 import xRedUtils.dicts as dicts
@@ -34,12 +40,8 @@ import xRedUtils.iterables as iterables
 import xRedUtils.times as time
 import xRedUtils.type_hints as typehints
 import xRedUtils.strings as strings
+import xRedUtils.files as files
 
 from xRedUtils.test.test import main_test
-
-def check_py_version() -> None | SystemError:
-    if sys.version_info < (3, 12):
-        raise SystemError("Python 3.12 or higher required!")
-check_py_version()
 
 del sys
