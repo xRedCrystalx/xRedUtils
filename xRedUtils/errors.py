@@ -18,7 +18,6 @@ sys.dont_write_bytecode = True
 
 from .type_hints import SIMPLE_ANY
 
-
 def full_traceback() -> str:
     """
     Generates a full traceback of the current `exception` as a string.

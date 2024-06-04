@@ -19,8 +19,14 @@ from xRedUtils import dicts
 
 import sys, json, io
 sys.dont_write_bytecode = True
+from typing import overload
 
 from .type_hints import SIMPLE_ANY
+
+@overload
+def dict_walk(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], path: str | list[str], _sep: str = ".") -> SIMPLE_ANY: ...
+@overload
+def dict_walk(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], path: str | list[str], _sep: str = ".", _slice: slice = slice(None, None)) -> SIMPLE_ANY: ...
 
 def dict_walk(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], path: str | list[str], _sep: str = ".", _slice: slice = slice(None, None)) -> SIMPLE_ANY:
     """
@@ -80,6 +86,11 @@ def dict_merge(dict1, dict2) -> dict[SIMPLE_ANY, SIMPLE_ANY]:
     - A new `dictionary` containing the merged key-value pairs from both dictionaries.
     """
     return dict1 | dict2
+
+@overload
+def flatten_dict(dictionary: dict[str, SIMPLE_ANY], _sep: str= "_") -> dict[str, SIMPLE_ANY]: ...
+@overload
+def flatten_dict(dictionary: dict[str, SIMPLE_ANY], _sep: str= "_", _parent_key="") -> dict[str, SIMPLE_ANY]: ...
 
 def flatten_dict(dictionary: dict[str, SIMPLE_ANY], _sep: str= "_", _parent_key="") -> dict[str, SIMPLE_ANY]:
     """

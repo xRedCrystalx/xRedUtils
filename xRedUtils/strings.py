@@ -15,7 +15,7 @@ from xRedUtils import strings
 
 import sys
 sys.dont_write_bytecode = True
-from typing import Literal
+from typing import Literal, overload
 
 def pluralize(singular: str) -> str:
     """
@@ -37,6 +37,11 @@ def pluralize(singular: str) -> str:
         return singular + "es"
 
     return singular + "s"
+
+@overload
+def string_split(string: str, chunk_size: int, option: Literal["normal", "smart"] = "normal") -> list[str]: ...
+@overload
+def string_split(string: str, chunk_size: int, option: Literal["normal", "smart"] = "normal", _sep: str = " ") -> list[str]: ...
 
 def string_split(string: str, chunk_size: int, option: Literal["normal", "smart"] = "normal", _sep: str = " ") -> list[str]:
     """
