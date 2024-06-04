@@ -14,6 +14,7 @@ import xRedUtils.funcs as test_funcs
 import xRedUtils.dates as test_dates
 import xRedUtils.maths as test_maths
 import xRedUtils.strings as test_strings
+import xRedUtils.files as test_files
 
 checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
     test_dict.dict_merge: {
@@ -154,6 +155,15 @@ checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
             "singular": "ferrule"
         },
         "result": "ferrules"
+    },
+
+    test_files.open_file: {
+        "kwargs": {
+            "path": r"C:\Users\Red\Documents\Projects\xRedUtils\xRedUtils\errors.py",
+            "encoding": None,
+            "mode": "rb"
+        },
+        "result": "*"
     }
 }
 
