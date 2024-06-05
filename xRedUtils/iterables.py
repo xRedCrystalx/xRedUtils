@@ -7,6 +7,7 @@ This module provides utilities for manipulating with iterables.
 - `remove_type` - Removes all items of a specified type from the iterable.
 - `compare_iterables` - Compare two iterables and return a list of items that are present in both iterables.
 - `count_occurrences` - Count the number of times a specific item occurs in an iterable.
+- `get_attr_data` - Retrieves attribute data from each object in the iterable. If no attribute was found, ignores the `item`.
 
 ### Usage:
 ```py
@@ -100,3 +101,16 @@ def count_occurrences(iterable: ITERABLE, item: SIMPLE_ANY) -> int:
     - The number of times the item occurs in the iterable.
     """
     return len([element for element in iterable if element == item])
+
+def get_attr_data(iterable: ITERABLE, attr: str) -> list[SIMPLE_ANY]:
+    """
+    Retrieves attribute data from each object in the iterable. If no attribute was found, ignores the `item`.
+
+    ### Parameters:
+    - `iterable` - The `iterable` to search through.
+    - `attr` - Name of the attribute.
+
+    ### Returns:
+    - `Iterable` of returned attribute data.
+    """
+    return [data if (data := getattr(item, attr, "_NO_ATTR")) != "_NO_ATTR" else item for item in iterable]
