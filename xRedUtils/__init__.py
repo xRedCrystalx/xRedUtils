@@ -21,7 +21,7 @@ __title__ = "RedUtils"
 __author__ = "xRedCrystalx"
 __license__ = "MIT"
 __copyright__ = "Copyright 2024-present xRedCrystalx"
-__version__ = "0.0.3"
+__version__ = "1.0.4"
 
 def check_py_version() -> None | SystemError:
     if sys.version_info < (3, 12):
