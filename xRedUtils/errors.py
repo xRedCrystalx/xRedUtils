@@ -20,7 +20,7 @@ from .type_hints import SIMPLE_ANY
 
 def full_traceback() -> str:
     """
-    Generates a full traceback of the current `exception` as a string.
+    Generates a full traceback of the current `Exception` as a string.
 
     Returns:
     - A `string` containing the full traceback information.
