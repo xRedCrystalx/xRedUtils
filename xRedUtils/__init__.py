@@ -21,7 +21,7 @@ __title__ = "RedUtils"
 __author__ = "xRedCrystalx"
 __license__ = "MIT"
 __copyright__ = "Copyright 2024-present xRedCrystalx"
-__version__ = "1.0.4"
+__version__ = "1.0.5"
 
 def check_py_version() -> None | SystemError:
     if sys.version_info < (3, 12):
@@ -41,6 +41,7 @@ import xRedUtils.times as time
 import xRedUtils.type_hints as typehints
 import xRedUtils.strings as strings
 import xRedUtils.files as files
+import xRedUtils.paths as paths
 
 from xRedUtils.test.test import main_test
 
