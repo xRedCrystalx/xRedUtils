@@ -71,6 +71,6 @@ def value_from_percentage(total: NUMBER, percentage: NUMBER) -> NUMBER:
     - `percentage` - The percentage of the total.
 
     ### Returns:
-    - The value that corresponds to the given percentage of the total.
+    - The value as `float` that corresponds to the given percentage of the total.
     """
     return (percentage / 100) * total

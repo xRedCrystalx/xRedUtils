@@ -32,7 +32,7 @@ def open_file(path: str, encoding: str = "utf-8", mode: Literal["r", "rb"] = "r"
     ### Parameters:
     - `path` - Path to the file.
     - `encoding` - Encoding used for decoding. (Set to `None` if opening in `rb` mode)
-    - `mode` - File opening mode
+    - `mode` - File opening mode (same as open() func)
     
     - `decoder` - Usage of decoder. For example `json` would return a `dict` object
     - `**kwargs` - Extra kwargs provided for `open` built-in function 
@@ -58,7 +58,7 @@ def save_file(path: str, data: SIMPLE_ANY, mode: str = "w", encoder: Literal["js
     ### Parameters:
     - `path` - Path to the file.
     - `data` - Data that you want to save.
-    - `mode` - File writing mode.
+    - `mode` - File writing mode. (same as open() func)
     
     - `encoder` - Usage of encoder. For example `json` would convert `dict` to `string`.
     - `**kwargs` - Extra kwargs for `encoders` settings 
