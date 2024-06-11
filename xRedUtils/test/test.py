@@ -15,8 +15,12 @@ import xRedUtils.dates as test_dates
 import xRedUtils.maths as test_maths
 import xRedUtils.strings as test_strings
 import xRedUtils.files as test_files
+import xRedUtils.paths as test_paths
 
-checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
+from xRedUtils.general import OS
+_sep: str = test_paths.CURRENT_SEPERATOR
+
+checks: dict[typing.Callable, dict[str, SIMPLE_ANY], tuple[SIMPLE_ANY, ...], SIMPLE_ANY] = {
     test_dict.dict_merge: {
         "kwargs": {
             "dict1": {"a": 1, "b": {"b": 10, "c": 15}},
@@ -100,6 +104,27 @@ checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
         },
         "result": ["Yes", 5, "STR", 2.123]
     },
+    test_iterables.compare_iterables: {
+        "kwargs": {
+            "iterable1": ["1", 1934, False, id],
+            "iterable2": [None, True, id, 1, "1"]
+        },
+        "result": ["1", id]
+    },
+    test_iterables.count_occurrences: {
+        "kwargs": {
+            "iterable": ["Yes", None, 124, None, True, False, id, None],
+            "item": None
+        },
+        "result": 3
+    },
+    test_iterables.get_attr_data: {
+        "kwargs": {
+            "iterable": [complex(10, 3), complex(523, 34), complex(12, 54)],
+            "attr": "imag"
+        },
+        "result": [3, 34, 54]
+    },
 
     test_funcs.safe_call: {
         "kwargs": {
@@ -164,13 +189,43 @@ checks: dict[typing.Callable, dict[str, SIMPLE_ANY]] = {
             "mode": "rb"
         },
         "result": "*"
+    },
+
+    test_paths.join_paths: {
+        "args": ("home", "red", "xRedUtils", "tests", "test.py"),
+        "result": f"home{_sep}red{_sep}xRedUtils{_sep}tests{_sep}test.py"
+    },
+    test_paths.to_absolute: {
+        "kwargs": {
+            "relative_path": "/xRedUtils/paths.py"
+        },
+        "result": "*" # Cannot determine due to OS differences, file positions
+    },
+    test_paths.to_relative: {
+        "kwargs": {
+            "absolute_path": "/home/red/xRedUtils/paths.py",
+            "base_path": "/home/red"
+        },
+        "result": f"xRedUtils{_sep}paths.py"
+    },
+    test_paths.to_uri: {
+        "kwargs": {
+            "path": "/home/red/xRedUtils/paths.py"
+        },
+        "result": f"file:///{"C:" if  OS == "Windows" else ""}/home/red/xRedUtils/paths.py"
+    },
+    test_paths.from_uri: {
+        "kwargs": {
+            "uri": "file:///home/red/xRedUtils/paths.py"
+        },
+        "result": f"{"C:" if  OS == "Windows" else ""}{_sep}home{_sep}red{_sep}xRedUtils{_sep}paths.py"
     }
 }
 
 def main_test() -> None:
     fails: int = 0
     for func, data in checks.items():
-        if not runner(func, data["result"], *data.get("args", []), **data.get("kwargs", {})):
+        if not runner(func, data.get("result"), *data.get("args", []), **data.get("kwargs", {})):
             print(f"Failed to run: {func.__qualname__}")
             fails += 1
     else:
