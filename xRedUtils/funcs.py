@@ -53,4 +53,4 @@ def safe_call(func: Callable, args: tuple | list = None, kwargs: dict[str, SIMPL
     except Exception as error:
         print(simple_error(error) if _error == "simple" else full_traceback())
 
-    return _default or None
+    return _default
