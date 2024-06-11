@@ -1,26 +1,37 @@
-import sys
+import sys, importlib.util, types
 sys.dont_write_bytecode = True
-from typing import Callable
-
-from xRedUtils.type_hints import SIMPLE_ANY
-
-def resolve_path(path: str) -> str:
-    return path.replace("\\", ".").replace("/", ".")
 
 
-def reload_module(path: str, returns: list[str] | None) -> list[Callable] | None:
-    path = resolve_path(path)
+def resolve_name(name: str, package: str = None) -> str:
+    return importlib.util.resolve_name(name, package)
+
+def load_module(name: str, package: str = None) -> types.ModuleType:
+    return importlib.import_module(name, package)
+
+def unload_module(name: str, package: str = None) -> str | None:
+    """
+    Removes cached module (sys.modules) from the current running instance.
     
-    # removing cached module from system
+    ## WARNING: Removing a module dynamically can result to errors, crashes etc. if not used properly. USE WITH YOUR OWN RISK!
+    
+    ### Parameters:
+    - `name` - Python like path of the module. (using `.` as seperators)
+    - `package` - 
+
+    ### Returns:
+    - Python path, if sucessful else `None`
+
+    """
+    path = resolve_name(name, package)
     if path in sys.modules:
-        del sys.modules[path]
+        try:
+            del sys.modules[path]
+            return path
+        except: pass
 
-    # re-importing module
-    try:
-        exec(f"import {path}")
-    except Exception as error:
-        return print(f"Failed to reload {path}. {type(error).__name__}: {error}")
-    
-    # returning callables
-    if returns:
-        return [getattr(sys.modules[path], x) for x in returns]
+def reload_module(name: str, package: str = None, ignore_not_loaded: bool = False) -> types.ModuleType | None:
+    # removing cached module from system
+    if not unload_module(name, package) and not ignore_not_loaded:
+        raise ImportWarning("Module not loaded. Use `ignore_not_loaded = True` to bypass this warning or load the module using `load_module`")
+
+    return load_module(name, package)
