@@ -23,6 +23,11 @@ sys.dont_write_bytecode = True
 
 from .type_hints import NUMBER_DICT, NUMBER
 
+__all__ = (
+    "UNITS", "OPTIONS",
+    "convert_to_seconds", "seconds_to_str", "str_to_seconds"
+)
+
 UNITS: NUMBER_DICT = {
     "second": 1,
     "minute": 60,

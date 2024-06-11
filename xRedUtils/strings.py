@@ -17,6 +17,10 @@ import sys
 sys.dont_write_bytecode = True
 from typing import Literal, overload
 
+__all__ = (
+    "pluralize", "string_split"
+)
+
 def pluralize(singular: str) -> str:
     """
     Pluralizes a given singular word. -- Cannot handle special words.

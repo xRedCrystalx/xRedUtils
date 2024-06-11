@@ -19,6 +19,10 @@ from typing import Callable, Literal, overload
 from .type_hints import SIMPLE_ANY
 from .errors import full_traceback, simple_error
 
+__all__ = (
+    "safe_call",
+)
+
 @overload
 def safe_call(func: Callable, args: tuple | list = None, kwargs: dict[str, SIMPLE_ANY] = None) -> SIMPLE_ANY: ...
 @overload
