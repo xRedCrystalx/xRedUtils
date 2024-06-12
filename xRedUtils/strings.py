@@ -18,7 +18,7 @@ sys.dont_write_bytecode = True
 from typing import Literal, overload
 
 __all__ = (
-    "pluralize", "string_split"
+    "pluralize", "string_split", "levenshtein_distance"
 )
 
 def pluralize(singular: str) -> str:
@@ -95,5 +95,40 @@ def string_split(string: str, chunk_size: int, option: Literal["normal", "smart"
 
     return [string[i:i + chunk_size] for i in range(0, len(string), chunk_size)]
 
+def levenshtein_distance(string1: str, string2: str) -> int:
+    """
+    Compute the Levenshtein distance between two strings.
 
-#TODO: custom placeholder handler
+    String metric - minimum number of single-character edits (insertions, deletions or substitutions) required to change one string into the other. 
+    
+    ### Parameters:
+    - `string1` - First string
+    - `string2` - Second string
+    
+    *longer string will be used to do checks
+
+    ### Returns:
+    -  The minimum `number` of changes.
+    """
+    # switch (first argument must be longer than second)
+    if len(string1) < len(string2):
+        return levenshtein_distance(string2, string1)
+
+    # if second string is empty, means len(string1) instertions
+    if len(string2) == 0:
+        return len(string1)
+
+    previous_row: list[int] = range(len(string2) + 1)
+    
+    for index1, char1 in enumerate(string1):
+        current_row: list[int] = [index1+1]
+
+        for index2, char2 in enumerate(string2):
+            insertions: int = previous_row[index2+1] + 1
+            deletions: int = current_row[index2] + 1
+            substitutions: int = previous_row[index2] + (char1 != char2)
+            current_row.append(min(insertions, deletions, substitutions))
+    
+        previous_row: list[int] = current_row
+    
+    return previous_row[-1]
