@@ -1,0 +1,22 @@
+IDEAS:
+- terminal/cmd inside program > handler
+- colors (possibly like CSS type?) - convert RGB to hex -||-
+- string parser (converting)
+- easier logging?
+- check palindromes
+- custom placeholder handler
+- check prime numbers
+- sorting algos: bubble, merge, quick, binary search
+- power of a numbers
+- fibb sequence, nth fibb
+- factorial of number
+- hashing algorithms, encodings
+- Hamming distance
+- UUID gens
+- SMA - simple moving average
+- simple web requests?
+- network packet sender
+- cryptography - encrypting/decrypting, public and private key general
+- simple image manipulation - remove background, resize
+- Compute Mean, Median, Mode
+- KNN Algo
