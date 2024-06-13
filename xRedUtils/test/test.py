@@ -6,6 +6,7 @@ import sys, typing
 sys.dont_write_bytecode = True
 from xRedUtils.type_hints import SIMPLE_ANY
 from xRedUtils.errors import full_traceback
+from xRedUtils.system import OS
 
 import xRedUtils.dicts as test_dict
 import xRedUtils.times as test_time
@@ -17,7 +18,6 @@ import xRedUtils.strings as test_strings
 import xRedUtils.files as test_files
 import xRedUtils.paths as test_paths
 
-from xRedUtils.general import OS
 _sep: str = test_paths.CURRENT_SEPERATOR
 
 checks: dict[typing.Callable, dict[str, SIMPLE_ANY], tuple[SIMPLE_ANY, ...], SIMPLE_ANY] = {
