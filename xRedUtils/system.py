@@ -25,6 +25,7 @@ PY_BUILD: tuple[str, str] = platform.python_build()
 PY_BRANCH: str = platform.python_branch()
 PY_IMPLEMENTATION: str = platform.python_implementation()
 PY_VERSION: tuple[str, str, str] = platform.python_version_tuple()
+RECURSION_LIMIT: int = sys.getrecursionlimit()
 
 # system
 MACHINE_TYPE: str = platform.machine()
@@ -32,12 +33,17 @@ NODE: str = platform.node()
 ARCHITECTURE: tuple[str, str] = platform.architecture()
 PLATFORM: str = platform.platform()
 DEVICE_ENCODING: str | None = os.device_encoding(1)
-
-WIN_EDITION: str = platform.win32_edition()
-WIN_IOT: bool = platform.win32_is_iot()
-
 CPU_COUNT: int | None = os.cpu_count()
 PROCESSOR_NAME: str = platform.processor()
-DRIVES: list[str] = os.listdrives() if OS == "Windows" else []
 
-RECURSION_LIMIT: int = sys.getrecursionlimit()
+# windows specific
+if OS == "Windows":
+    DRIVES: list[str] = os.listdrives()
+
+    WIN_EDITION: str = platform.win32_edition()
+    WIN_IOT: bool = platform.win32_is_iot()
+
+
+# mac specific
+if OS == "Darwin":
+    pass
