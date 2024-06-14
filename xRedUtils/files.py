@@ -70,9 +70,9 @@ def save_file(path: str, data: SIMPLE_ANY, mode: str = "w", encoder: Literal["js
     ### Returns:
     - Nothing.
     """
-    with open(path, mode=mode, ) as file:
+    with open(path, mode=mode) as file:
         if encoder == "json":
             json.dump(data, file, **kwargs)
             return
  
-        file.write(data)
+        file.write(str(data))
