@@ -222,6 +222,8 @@ checks: dict[typing.Callable, dict[str, SIMPLE_ANY], tuple[SIMPLE_ANY, ...], SIM
     }
 }
 
+#TODO: tests for regexes, general, errors?
+
 def main_test() -> None:
     fails: int = 0
     for func, data in checks.items():
