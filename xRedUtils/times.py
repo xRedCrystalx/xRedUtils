@@ -22,8 +22,9 @@ import sys, typing
 sys.dont_write_bytecode = True
 
 from .type_hints import NUMBER_DICT, NUMBER
+from .strings import pluralize, singularize
 
-__all__ = (
+__all__: tuple[str, ...] = (
     "UNITS", "OPTIONS",
     "convert_to_seconds", "seconds_to_str", "str_to_seconds"
 )
@@ -73,7 +74,7 @@ def seconds_to_str(seconds: int, _sep: str = ", ") -> str:
     for unit in reversed(UNITS.keys()):
         if seconds >= UNITS[unit]:
             count, seconds = divmod(seconds, UNITS[unit])
-            components.append(f"{count} {unit}{"s" if count != 1 else ""}")
+            components.append(f"{count} {pluralize(unit) if count != 1 else unit}")
 
     return _sep.join(components) if components else "0 seconds"
 
@@ -93,6 +94,6 @@ def str_to_seconds(time_string: str, _sep: str = ", ") -> int:
 
     for comp in components:
         count, unit = comp.split(" ") or (0, "second")
-        total_seconds += int(count) * UNITS[unit.rstrip("s")]
+        total_seconds += int(count) * UNITS[singularize(unit)]
 
     return total_seconds
