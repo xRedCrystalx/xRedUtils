@@ -1,5 +1,5 @@
 """
-This module provides utilities for manipulating with iterables.
+This module provides functions for manipulating with iterables.
 
 ### Functions:
 - `flatten_iterable` - Flattens a iterable into a single level list.
@@ -8,6 +8,7 @@ This module provides utilities for manipulating with iterables.
 - `compare_iterables` - Compare two iterables and return a list of items that are present in both iterables.
 - `count_occurrences` - Count the number of times a specific item occurs in an iterable.
 - `get_attr_data` - Retrieves attribute data from each object in the iterable. If no attribute was found, ignores the `item`.
+- `to_iterable` - Converts data into a list.
 
 ### Usage:
 ```py
@@ -22,8 +23,8 @@ sys.dont_write_bytecode = True
 
 from .type_hints import SIMPLE_ANY, ITERABLE
 
-__all__ = (
-    "flatten_iterable", "remove_items", "remove_type", "compare_iterables", "count_occurrences", "get_attr_data"
+__all__: tuple[str, ...] = (
+    "flatten_iterable", "remove_items", "remove_type", "compare_iterables", "count_occurrences", "get_attr_data", "to_iterable"
 )
 
 def flatten_iterable(iterable: ITERABLE) -> list[SIMPLE_ANY]:
@@ -40,7 +41,7 @@ def flatten_iterable(iterable: ITERABLE) -> list[SIMPLE_ANY]:
     - `iterable` - Any iterable (`list`, `tuple`, `set`...)
 
     ### Returns:
-    - A list containing all the elements of the iterable in one level.
+    - A `list` containing all the elements of the iterable in one level.
 
     """
     if not isinstance(iterable, ITERABLE):
@@ -63,7 +64,7 @@ def remove_items(iterable: ITERABLE, item: SIMPLE_ANY) -> list[SIMPLE_ANY]:
     - `item` - The item to remove from the iterable.
     
     ### Returns:
-    -  A new list with the specified item removed.
+    -  A new `list` with the specified item removed.
     """
     return [element for element in iterable if element != item]
 
@@ -76,7 +77,7 @@ def remove_type(iterable: ITERABLE, obj: type) -> list[SIMPLE_ANY]:
     - `obj` - The type of items to remove from the iterable.
     
     ### Returns:
-    - A new list with items of the specified type removed.
+    - A new `list` with items of the specified type removed.
     """
     return [element for element in iterable if not isinstance(element, obj)]
 
@@ -118,3 +119,19 @@ def get_attr_data(iterable: ITERABLE, attr: str) -> list[SIMPLE_ANY]:
     - `Iterable` of returned attribute data.
     """
     return [data if (data := getattr(item, attr, "_NO_ATTR")) != "_NO_ATTR" else item for item in iterable]
+
+def to_iterable(data: SIMPLE_ANY, slice: bool = False) -> list[SIMPLE_ANY]:
+    """
+    Converts data into a list.
+    
+    ### Parameters:
+    - `data` - The data that will be converted.
+    - `slice` - If the data will be sliced. For example string `"Hello"` ➜  `["H", "e", "l", "l", "o"]`.
+
+    ### Returns:
+    - Data converted into an `iterable`.
+    """
+    if isinstance(data, ITERABLE) or slice:
+        return list(data)
+
+    return [data]
