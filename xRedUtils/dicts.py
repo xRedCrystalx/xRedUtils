@@ -23,7 +23,7 @@ from typing import overload
 
 from .type_hints import SIMPLE_ANY
 
-__all__ = (
+__all__: tuple[str, ...] = (
     "dict_walk", "value_exist", "dict_merge", "flatten_dict", "json_to_dict", "dict_to_json"
 )
 
@@ -128,7 +128,7 @@ def json_to_dict(d: bytes | str | bytearray | io.TextIOWrapper, **kwargs) -> dic
     - `**kwargs` - Additional keyword arguments to pass to the `json.loads` function.
 
     ### Returns:
-    - A Python dictionary containing the parsed JSON data.
+    - A `dictionary` containing the parsed JSON data.
     """
     if isinstance(d, io.TextIOWrapper):
         d = d.read()

@@ -1,6 +1,10 @@
 """
 General - not yet organized variables and functions.
 
+### Functions:
+- `isPalindrome` - Checks if the `string` representation of any datatype is palindrome.
+- `generate_uuid` - Generates a random UUID.
+
 ### Usage:
 ```py
 import xRedUtils.general as general
@@ -11,7 +15,11 @@ from xRedUtils import general
 
 import sys, uuid
 sys.dont_write_bytecode = True
-from xRedUtils.type_hints import SIMPLE_ANY
+from .type_hints import SIMPLE_ANY
+
+__all__: tuple[str, ...] = (
+    "isPalindrome", "generate_uuid"
+)
 
 def isPalindrome(p: SIMPLE_ANY) -> bool:
     """
@@ -27,6 +35,6 @@ def isPalindrome(p: SIMPLE_ANY) -> bool:
 
 def generate_uuid() -> str:
     """
-    Generates a random UUID
+    Generates a random UUID.
     """
     return str(uuid.uuid4())

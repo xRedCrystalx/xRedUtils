@@ -20,7 +20,7 @@ from typing import overload, Literal
 from .type_hints import SIMPLE_ANY
 from .dicts import json_to_dict
 
-__all__ = (
+__all__: tuple[str, ...] = (
     "open_file", "save_file"
 )
 
@@ -75,4 +75,5 @@ def save_file(path: str, data: SIMPLE_ANY, mode: str = "w", encoder: Literal["js
             json.dump(data, file, **kwargs)
             return
  
+        #NOTE: maybe for bytes support?
         file.write(str(data))

@@ -17,7 +17,7 @@ import sys, datetime, time
 sys.dont_write_bytecode = True
 from typing import Literal
 
-__all__ = (
+__all__: tuple[str, ...] = (
     "get_datetime", "timestamp"
 )
 
@@ -26,9 +26,9 @@ def get_datetime(option: Literal["UTC"] | None = None) -> datetime.datetime:
     Get the current datetime.
 
     ### Parameters:
-        - `option` - If 'UTC' is provided, returns the current datetime in UTC timezone.
+    - `option` - If `"UTC"` is provided, returns the current datetime in UTC timezone.
     ### Returns:
-        Current `datetime` object.
+    - Current `datetime` object.
     """
     if option == "UTC":
         return datetime.datetime.now(datetime.UTC)
@@ -40,10 +40,10 @@ def timestamp(dt: datetime.datetime) -> int:
     Converts a datetime object to a UNIX timestamp.
 
     ### Parameters:
-    - `dt` - The datetime object to convert.
+    - `dt` - The `datetime` object to convert.
 
     ### Returns:
-    The UNIX timestamp corresponding to the input datetime in `int`.
+    - The UNIX timestamp corresponding to the input datetime in `int`.
     """
     if dt and isinstance(dt, datetime.datetime):
         return int(datetime.datetime.timestamp(dt))

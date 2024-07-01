@@ -21,7 +21,7 @@ from typing import Literal
 from .type_hints import NUMBER
 from .errors import InvalidRootError
 
-__all__ = (
+__all__: tuple[str, ...] = (
     "root", "percentage_difference", "value_from_percentage"
 )
 

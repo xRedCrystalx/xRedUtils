@@ -43,7 +43,6 @@ if OS == "Windows":
     WIN_EDITION: str = platform.win32_edition()
     WIN_IOT: bool = platform.win32_is_iot()
 
-
 # mac specific
 if OS == "Darwin":
     pass
