@@ -1,7 +1,25 @@
+"""
+This module provides functions for `"hot reloading"`.
+
+# USE THESE MODULES WITH YOUR OWN RISK!
+
+### Functions:
+- `load_module` - Imports new python module (in sys.modules) in the current running instance.
+- `unload_module` - Removes cached module (sys.modules) from the current running instance.
+- `reload_module` - Reloads cached module (sys.modules) in the current running instance with new version.
+
+### Usage:
+```py
+import xRedUtils.modules.reloader as reloader
+or
+from xRedUtils.modules import reloader
+```
+"""
+
 import sys, importlib.util, types
 sys.dont_write_bytecode = True
 
-__all__ = (
+__all__: tuple[str, ...] = (
     "load_module", "unload_module", "reload_module"
 )
 
