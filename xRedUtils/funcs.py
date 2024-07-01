@@ -19,16 +19,16 @@ from typing import Callable, Literal, overload
 from .type_hints import SIMPLE_ANY
 from .errors import full_traceback, simple_error
 
-__all__ = (
+__all__: tuple[str, ...] = (
     "safe_call",
 )
 
 @overload
 def safe_call(func: Callable, args: tuple | list = None, kwargs: dict[str, SIMPLE_ANY] = None) -> SIMPLE_ANY: ...
 @overload
-def safe_call(func: Callable, args: tuple | list = None, kwargs: dict[str, SIMPLE_ANY] = None, _default: SIMPLE_ANY = None, _error: Literal["simple", "full"] = "simple") -> SIMPLE_ANY: ...
+def safe_call(func: Callable, args: tuple | list = None, kwargs: dict[str, SIMPLE_ANY] = None, _default: SIMPLE_ANY = None, _error: Literal["simple", "full", "none"] = "simple") -> SIMPLE_ANY: ...
 
-def safe_call(func: Callable, args: tuple | list = None, kwargs: dict[str, SIMPLE_ANY] = None, _default: SIMPLE_ANY = None, _error: Literal["simple", "full"] = "simple") -> SIMPLE_ANY:
+def safe_call(func: Callable, args: tuple | list = None, kwargs: dict[str, SIMPLE_ANY] = None, _default: SIMPLE_ANY = None, _error: Literal["simple", "full", "none"] = "simple") -> SIMPLE_ANY:
     """
     Safely calls a function with given arguments and keyword arguments. If an exception occurs,
     it handles the exception based on the specified error handling mode and returns a default value.
@@ -51,6 +51,7 @@ def safe_call(func: Callable, args: tuple | list = None, kwargs: dict[str, SIMPL
     try:
         return func(*args, **kwargs)
     except Exception as error:
-        print(simple_error(error) if _error == "simple" else full_traceback())
+        if _error != "none":
+            print(simple_error() if _error == "simple" else full_traceback())
 
     return _default
