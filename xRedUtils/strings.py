@@ -1,9 +1,11 @@
 """
-This module provides string functions.
+This module provides string manipulation functions.
 
 ### Functions:
 - `pluralize` - Pluralizes a given singular word.
+- `singularize` - Singularize a given plural word.
 - `string_split` - Splits a string into chunks of specified size.
+- `levenshtein_distance` - Compute the Levenshtein distance between two strings.
 
 ### Usage:
 ```py
@@ -17,13 +19,13 @@ import sys
 sys.dont_write_bytecode = True
 from typing import Literal, overload
 
-__all__ = (
-    "pluralize", "string_split", "levenshtein_distance"
+__all__: tuple[str, ...] = (
+    "pluralize", "singularize", "string_split", "levenshtein_distance"
 )
 
 def pluralize(singular: str) -> str:
     """
-    Pluralizes a given singular word. -- Cannot handle special words.
+    Pluralizes a given singular word. -- Cannot handle irregular words.
 
     ### Parameters:
     - `singular` - The singular word to be pluralized.
@@ -41,6 +43,27 @@ def pluralize(singular: str) -> str:
         return singular + "es"
 
     return singular + "s"
+
+def singularize(plural: str) -> str:
+    """
+    Singularize a given plural word. -- Cannot handle irregular words.
+    
+    ### Parameters:
+    - `plural` - The plural word to be singularized.
+
+    ### Returns:
+    - The singular form of the word.
+    """
+    if plural.endswith("ies"):
+        return plural[:-3] + "y"
+    
+    elif [ending for ending in ["ses", "xes", "zes", "ches", "shes"] if plural.endswith(ending)]:
+        return plural[:-2]
+    
+    elif plural.endswith("s"):
+        return plural[:-1]
+
+    return plural
 
 @overload
 def string_split(string: str, chunk_size: int, option: Literal["normal", "smart"] = "normal") -> list[str]: ...
