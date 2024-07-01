@@ -17,11 +17,11 @@ Simple, general purpose functions in one place!
 import sys
 sys.dont_write_bytecode = True
 
-__title__ = "RedUtils"
+__title__ = "xRedUtils"
 __author__ = "xRedCrystalx"
 __license__ = "MIT"
 __copyright__ = "Copyright 2024-present xRedCrystalx"
-__version__ = "1.0.5-1"
+__version__ = "2.0.0"
 
 def check_py_version() -> None | SystemError:
     if sys.version_info < (3, 12):
@@ -44,6 +44,6 @@ import xRedUtils.files as files
 import xRedUtils.paths as paths
 import xRedUtils.general as general
 
-from xRedUtils.test.test import main_test
+from tests.test import main_test
 
 del sys
