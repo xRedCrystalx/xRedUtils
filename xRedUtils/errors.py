@@ -1,5 +1,5 @@
 """
-This module provides functions for generating error messages.
+This module provides functions and `Exception` classes for generating error messages.
 
 ### Functions:
 - `full_traceback` - Generates a full traceback of the current exception as a string.
@@ -16,8 +16,6 @@ from xRedUtils import errors
 import sys, traceback
 sys.dont_write_bytecode = True
 
-from .type_hints import SIMPLE_ANY
-
 def full_traceback() -> str:
     """
     Generates a full traceback of the current `Exception` as a string.
@@ -27,16 +25,14 @@ def full_traceback() -> str:
     """
     return traceback.format_exc()
 
-def simple_error(error: Exception) -> str:
+def simple_error() -> str:
     """
     Formats a simple error message for an exception.
-
-    ### Parameters:
-    - `error` - The `exception` for which to generate the error message.
 
     ### Returns:
     - A `string` containing a simple one line error.
     """
+    error: BaseException | None = sys.exception()
     return f"{type(error).__name__}: {error}"
 
 class InvalidRootError(ArithmeticError):
