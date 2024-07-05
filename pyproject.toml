@@ -31,6 +31,7 @@ include = [
     "xRedUtils.modules",
     "xRedUtilsAsync",
     "xRedUtilsAsync.modules",
-    "tests"
+    "tests",
+    "tests.loaders"
 ]
-exclude = ["TODO"]
+exclude = ["TODO", "NOTES.txt"]
