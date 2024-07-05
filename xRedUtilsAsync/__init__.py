@@ -7,7 +7,7 @@ Simple, general purpose async functions in one place!
 ```py
 >>> import xRedUtilsAsync, asyncio
 >>> asyncio.run(xRedUtilsAsync.main_test())
-"All checks passed!"
+All tests complete.
 ```
 
 :copyright: (c) 2024 by xRedCrystalx.
@@ -44,6 +44,6 @@ import xRedUtilsAsync.files as files
 import xRedUtilsAsync.paths as paths
 import xRedUtilsAsync.general as general
 
-from tests.test import main_test
+from tests.async_test import main_test
 
 del sys

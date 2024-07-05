@@ -7,7 +7,7 @@ Simple, general purpose functions in one place!
 ```py
 >>> import xRedUtils
 >>> xRedUtils.main_test()
-"All checks passed!"
+All tests complete.
 ```
 
 :copyright: (c) 2024 by xRedCrystalx.
@@ -44,6 +44,6 @@ import xRedUtils.files as files
 import xRedUtils.paths as paths
 import xRedUtils.general as general
 
-from tests.test import main_test
+from tests.sync_test import main_test
 
 del sys
