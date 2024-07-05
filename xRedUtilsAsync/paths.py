@@ -25,6 +25,8 @@ import sys, os, urllib.parse
 sys.dont_write_bytecode = True
 from pathlib import Path
 
+from xRedUtilsAsync.type_hints import STR_ITERABLE
+
 __all__: tuple[str, ...] = (
     "PATH_SEPERATORS", "CURRENT_SEPERATOR", "CWD",
     "to_absolute", "to_relative", "to_uri", "from_uri", "join_parts"
@@ -98,12 +100,12 @@ async def from_uri(uri: str) -> str:
     parsed_url: urllib.parse.ParseResult = urllib.parse.urlparse(uri)
     return os.path.abspath(os.path.join(parsed_url.netloc, parsed_url.path))
 
-async def join_paths(*paths: str) -> str:
+async def join_paths(paths: STR_ITERABLE) -> str:
     """
     Join multiple path parts or paths into a single path.
 
     ### Parameters:
-    - `*paths` - Positional arguments represnting parts of the path.
+    - `paths` - `String iterable` represnting parts of the path.
     
     ### Returns:
     - Joined `string` representing path.
