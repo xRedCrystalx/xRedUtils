@@ -30,6 +30,7 @@ include = [
     "xRedUtils",
     "xRedUtils.modules",
     "xRedUtilsAsync",
-    "xRedUtilsAsync.modules"
+    "xRedUtilsAsync.modules",
+    "tests"
 ]
 exclude = ["TODO"]
