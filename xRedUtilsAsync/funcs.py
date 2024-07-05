@@ -12,7 +12,7 @@ from xRedUtilsAsync import funcs
 ```
 """
 
-import sys
+import sys, asyncio
 sys.dont_write_bytecode = True
 from typing import Callable, Literal, overload
 
@@ -49,7 +49,7 @@ async def safe_call(func: Callable, args: tuple | list = None, kwargs: dict[str,
     kwargs = kwargs if kwargs and isinstance(kwargs, dict) else {}
 
     try:
-        return await func(*args, **kwargs)
+        return await func(*args, **kwargs) if asyncio.iscoroutine(func) else func(*args, **kwargs)
     except Exception:
         if _error != "none":
             print(await simple_error() if _error == "simple" else await full_traceback())

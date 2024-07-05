@@ -50,7 +50,8 @@ async def flatten_iterable(iterable: ITERABLE) -> list[SIMPLE_ANY]:
     new: list[SIMPLE_ANY] = []
     for element in iterable:
         if isinstance(element, ITERABLE):
-            new.extend(await flatten_iterable(element))
+            elements: list[SIMPLE_ANY] = await flatten_iterable(element)
+            new.extend(elements)
         else:
             new.append(element)
     return new
