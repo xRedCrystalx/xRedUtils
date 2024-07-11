@@ -1,5 +1,6 @@
 .. image:: https://github.com/xRedCrystalx/xRedUtils/blob/main/assets/transparent_banner.png
-    :height: 200
+    :height: 150
+    :align: center
 
 xRedUtils
 =========
