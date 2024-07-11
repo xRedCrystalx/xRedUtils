@@ -34,4 +34,4 @@ include = [
     "tests",
     "tests.loaders"
 ]
-exclude = ["TODO", "NOTES.txt"]
+exclude = ["TODO", "NOTES.txt", "assets"]
