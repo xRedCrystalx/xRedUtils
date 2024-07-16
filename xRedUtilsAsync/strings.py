@@ -9,6 +9,7 @@ This module provides async string manipulation functions.
 
 ### Usage:
 ```py
+
 import xRedUtilsAsync.strings as strings
 or
 from xRedUtilsAsync import strings

@@ -12,6 +12,7 @@ This module provides async functions for manipulating with iterables.
 
 ### Usage:
 ```py
+
 import xRedUtilsAsync.iterables as iterables
 or
 from xRedUtilsAsync import iterables

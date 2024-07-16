@@ -12,6 +12,7 @@ This module provides functions for manipulating with iterables.
 
 ### Usage:
 ```py
+
 import xRedUtils.iterables as iterables
 or
 from xRedUtils import iterables

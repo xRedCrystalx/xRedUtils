@@ -6,6 +6,7 @@ This module provides async functions to deal with functions. Yeah makes no sense
 
 ### Usage:
 ```py
+
 import xRedUtilsAsync.funcs as funcs
 or
 from xRedUtilsAsync import funcs

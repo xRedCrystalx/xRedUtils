@@ -15,6 +15,7 @@ This module provides async converting between different types of paths. Supporte
 
 ### Usage:
 ```py
+
 import xRedUtilsAsync.paths as paths
 or
 from xRedUtilsAsync import paths

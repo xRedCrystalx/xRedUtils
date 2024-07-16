@@ -12,7 +12,7 @@ This module provides functions for `"hot reloading"`.
 ```py
 import xRedUtils.modules.reloader as reloader
 or
-from xRedUtils.modules import reloader
+from xRedUtils import reloader
 ```
 """
 

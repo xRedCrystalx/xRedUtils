@@ -8,6 +8,7 @@ This module provides mathematics functions.
 
 ### Usage:
 ```py
+
 import xRedUtils.maths as maths
 or
 from xRedUtils import maths

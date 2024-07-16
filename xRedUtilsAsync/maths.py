@@ -8,6 +8,7 @@ This module provides async mathematics functions.
 
 ### Usage:
 ```py
+
 import xRedUtilsAsync.maths as maths
 or
 from xRedUtilsAsync import maths

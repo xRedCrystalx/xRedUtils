@@ -7,6 +7,7 @@ This module provides functions and `Exception` classes for generating error mess
 
 ### Usage:
 ```py
+
 import xRedUtils.errors as errors
 or
 from xRedUtils import errors

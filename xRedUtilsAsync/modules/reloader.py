@@ -10,9 +10,10 @@ This module provides async functions for `"hot reloading"`.
 
 ### Usage:
 ```py
+
 import xRedUtilsAsync.modules.reloader as reloader
 or
-from xRedUtilsAsync.modules import reloader
+from xRedUtilsAsync import reloader
 ```
 """
 

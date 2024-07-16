@@ -9,6 +9,7 @@ This module provides string manipulation functions.
 
 ### Usage:
 ```py
+
 import xRedUtils.strings as strings
 or
 from xRedUtils import strings

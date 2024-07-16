@@ -8,7 +8,6 @@ This module provides functions for converting time values between different unit
 
 ### Constants:
 - `UNITS` - A dictionary mapping time units to their conversion factors in seconds.
-- `OPTIONS` - Literal type containing valid time unit options for conversion.
 
 ### Usage:
 ```py
@@ -21,15 +20,10 @@ from xRedUtils import times
 import sys, typing
 sys.dont_write_bytecode = True
 
-from .type_hints import NUMBER_DICT, NUMBER
+from .type_hints import  NUMBER, NUMBER_DICT
 from .strings import pluralize, singularize
 
-__all__: tuple[str, ...] = (
-    "UNITS", "OPTIONS",
-    "convert_to_seconds", "seconds_to_str", "str_to_seconds"
-)
-
-UNITS: NUMBER_DICT = {
+TIME_UNITS: NUMBER_DICT = {
     "second": 1,
     "minute": 60,
     "hour": 3_600,
@@ -41,6 +35,12 @@ UNITS: NUMBER_DICT = {
     "century": 3_155_673_600,
     "millenium": 31_556_908_800
 }
+
+__all__: tuple[str, ...] = (
+    "UNITS", "TIME_UNITS",
+    "convert_to_seconds", "seconds_to_str", "str_to_seconds"
+)
+
 OPTIONS = typing.Literal["second", "minute", "hour", "day", "week", "month", "year", "decade", "century", "millenium"]
 
 def convert_to_seconds(value: NUMBER, option: OPTIONS) -> NUMBER:
@@ -54,7 +54,7 @@ def convert_to_seconds(value: NUMBER, option: OPTIONS) -> NUMBER:
     ### Returns:
     - The equivalent time value in seconds as `NUMBER`.
     """
-    if not (multiplicator := UNITS.get(option)):
+    if not (multiplicator := TIME_UNITS.get(option)):
         return 0
     return value * multiplicator
 
@@ -71,9 +71,9 @@ def seconds_to_str(seconds: int, _sep: str = ", ") -> str:
     """
     components: list[str] = []
 
-    for unit in reversed(UNITS.keys()):
-        if seconds >= UNITS[unit]:
-            count, seconds = divmod(seconds, UNITS[unit])
+    for unit in reversed(TIME_UNITS.keys()):
+        if seconds >= TIME_UNITS[unit]:
+            count, seconds = divmod(seconds, TIME_UNITS[unit])
             components.append(f"{count} {pluralize(unit) if count != 1 else unit}")
 
     return _sep.join(components) if components else "0 seconds"
@@ -94,6 +94,6 @@ def str_to_seconds(time_string: str, _sep: str = ", ") -> int:
 
     for comp in components:
         count, unit = comp.split(" ") or (0, "second")
-        total_seconds += int(count) * UNITS[singularize(unit)]
+        total_seconds += int(count) * TIME_UNITS[singularize(unit)]
 
     return total_seconds

@@ -7,6 +7,7 @@ This module provides functions for dealing with files. Opening, saving, decoding
 
 ### Usage:
 ```py
+
 import xRedUtils.files as files
 or
 from xRedUtils import files

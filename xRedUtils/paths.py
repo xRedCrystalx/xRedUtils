@@ -15,6 +15,7 @@ This module provides converting between different types of paths. Supported for 
 
 ### Usage:
 ```py
+
 import xRedUtils.paths as paths
 or
 from xRedUtils import paths

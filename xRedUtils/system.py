@@ -3,6 +3,7 @@ System information variables.
 
 ### Usage:
 ```py
+
 import xRedUtils.system as system
 or
 from xRedUtils import system

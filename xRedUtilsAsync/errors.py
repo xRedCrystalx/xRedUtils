@@ -7,6 +7,7 @@ This module provides async functions and `Exception` classes for generating erro
 
 ### Usage:
 ```py
+
 import xRedUtilsAsync.errors as errors
 or
 from xRedUtilsAsync import errors
@@ -28,9 +29,6 @@ async def full_traceback() -> str:
 async def simple_error() -> str:
     """
     Formats a simple error message for an exception.
-
-    ### Parameters:
-    - `error` - The `exception` for which to generate the error message.
 
     ### Returns:
     - A `string` containing a simple one line error.
