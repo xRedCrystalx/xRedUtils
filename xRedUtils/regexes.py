@@ -3,6 +3,7 @@ Module with compiled useful regexes
 
 ### Usage:
 ```py
+
 import xRedUtils.regexes as regexes
 or
 from xRedUtils import regexes
@@ -12,7 +13,7 @@ from xRedUtils import regexes
 import sys, re
 sys.dont_write_bytecode = True
 
-ANSI_C_PATTERN: re.Pattern[str] = re.compile(r"\x1b[^m]*m", re.IGNORECASE)
+ANSI_PATTERN: re.Pattern[str] = re.compile(r"(?:\x1B\[|\x9B)[0-?]*[ -\/]*[@-~]", re.IGNORECASE)
 URL_PATTERN: re.Pattern[str] = re.compile(r"\bhttps?://\S+\b")
 DATE_PATTERN: re.Pattern[str] = re.compile(r"\d{4}-\d{2}-\d{2}") #YYYY-MM-DD
 
