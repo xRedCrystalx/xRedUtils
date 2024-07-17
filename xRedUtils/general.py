@@ -39,3 +39,16 @@ def generate_uuid() -> str:
     Generates a random UUID.
     """
     return str(uuid.uuid4())
+
+# temp
+def format_number(num: float) -> str:
+    suffixes: list[str] = ['', 'K', 'M', 'B', 'T', 'P', 'E']
+    if num < 1000:
+        return str(num)
+    
+    for i, suffix in enumerate(suffixes):
+        unit = 1000 ** i
+        if num < 1000 ** (i + 1):
+            formatted_num = round(num / unit, 1)
+            return f"{formatted_num}{suffix}"
+    return f"{num:_}"
