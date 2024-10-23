@@ -15,10 +15,11 @@ def load_modules() -> list:
         files as test_files,
         funcs as test_funcs,
         paths as test_paths,
-        general as test_general
+        general as test_general,
+        objects as test_objects
     )
 
-    return [test_dicts, test_iterables, test_dates, test_maths, test_strings, test_files, test_funcs, test_paths, test_general]
+    return [test_dicts, test_iterables, test_dates, test_maths, test_strings, test_files, test_funcs, test_paths, test_general, test_objects]
 
 async def main_test() -> None:
     for module in load_modules() or []:
