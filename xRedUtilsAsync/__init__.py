@@ -21,7 +21,7 @@ __title__ = "xRedUtilsAsync"
 __author__ = "xRedCrystalx"
 __license__ = "MIT"
 __copyright__ = "Copyright 2024-present xRedCrystalx"
-__version__ = "2.1.0"
+__version__ = "2.2.0"
 
 def check_py_version() -> None | SystemError:
     if sys.version_info < (3, 12):
