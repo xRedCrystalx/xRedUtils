@@ -8,6 +8,8 @@ This module provides functions for working with dictionaries and JSON data.
 - `flatten_dict` - Flattens a nested dictionary into a single-level dictionary.
 - `json_to_dict` - Converts JSON data to a Python dictionary.
 - `dict_to_json` - Converts a dictionary to a JSON string with optional indentation and additional keyword arguments.
+- `get_value` - Gets value of specified key.
+- `get_key` - Gets key of specified value.
 
 ### Usage:
 ```py
@@ -25,7 +27,7 @@ from typing import overload
 from .type_hints import SIMPLE_ANY
 
 __all__: tuple[str, ...] = (
-    "dict_walk", "value_exist", "dict_merge", "flatten_dict", "json_to_dict", "dict_to_json"
+    "dict_walk", "value_exist", "dict_merge", "flatten_dict", "json_to_dict", "dict_to_json", "get_value", "get_key"
 )
 
 @overload
@@ -148,3 +150,38 @@ def dict_to_json(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], indent: int = 4, **kw
     - A JSON string representing the dictionary.
     """
     return json.dumps(dictionary, indent=indent, **kwargs)
+
+def get_value(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], key: SIMPLE_ANY) -> SIMPLE_ANY | None:  
+    """
+    Gets value of specified key.
+
+    ### Parameters:
+    - `dictionary` - The dictionary to search.
+    - `key` - Key to be used for searching.
+
+    ### Returns:
+    - Value of the key or `None` if key does not exist in dictionary.  
+    """
+    return dictionary.get(key)
+
+def get_key(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], value: SIMPLE_ANY) -> SIMPLE_ANY | None:
+    """
+    Gets key of specified value.
+    
+    ## ! WARNING !
+    This will find the first value in the dictionary. 
+    
+    ### Parameters:
+    - `dictionary` - The dictionary to search.
+    - `value` - Value to be used for searching.
+
+    ### Returns:
+    - Key of the value or `None` if value does not exist in dictionary.  
+    """
+    keys, values = dictionary.items()
+
+    try:
+        i: int = values.index(value)
+        return keys[i]
+    except:
+        return None
