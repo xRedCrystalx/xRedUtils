@@ -21,7 +21,7 @@ __title__ = "xRedUtils"
 __author__ = "xRedCrystalx"
 __license__ = "MIT"
 __copyright__ = "Copyright 2024-present xRedCrystalx"
-__version__ = "2.2.0"
+__version__ = "2.3.0"
 
 def check_py_version() -> None | SystemError:
     if sys.version_info < (3, 12):
@@ -44,6 +44,9 @@ import xRedUtils.files as files
 import xRedUtils.paths as paths
 import xRedUtils.general as general
 import xRedUtils.colors as colors
+import xRedUtils.hashing as hashing
+import xRedUtils.generators as generators
+import xRedUtils.type_converters as type_converters
 
 import xRedUtils.modules.reloader as reloader
 

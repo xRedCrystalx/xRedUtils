@@ -21,7 +21,7 @@ __title__ = "xRedUtilsAsync"
 __author__ = "xRedCrystalx"
 __license__ = "MIT"
 __copyright__ = "Copyright 2024-present xRedCrystalx"
-__version__ = "2.2.0"
+__version__ = "2.3.0"
 
 def check_py_version() -> None | SystemError:
     if sys.version_info < (3, 12):
@@ -44,6 +44,10 @@ import xRedUtilsAsync.files as files
 import xRedUtilsAsync.paths as paths
 import xRedUtilsAsync.general as general
 import xRedUtilsAsync.colors as colors
+import xRedUtilsAsync.hashing as hashing
+import xRedUtilsAsync.generators as generators
+import xRedUtilsAsync.type_converters as type_converters
+
 
 import xRedUtilsAsync.modules.reloader as reloader
 
