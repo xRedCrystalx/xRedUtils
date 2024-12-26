@@ -18,7 +18,7 @@ Simply import dataclasses and access its globals.
 ### Functions:
 - `manual_color_handler` - Ask the user if they want to see colors.
 - `auto_color_handler` - Automatically detects if the terminal/console supports colors.
-- `rgb` - Converts RGB values to ANSI colors.
+- `rgb_to_ansi` - Converts RGB values to ANSI colors.
 - `rem_colors` - Removes ANSI code from the string.
 - `display` - Displays color/style and name of specified dataclass.
 
@@ -38,7 +38,7 @@ from .regexes import ANSI_PATTERN
 
 __all__: tuple[str, ...] = (
     "Style", "Foreground16", "Background16", "Foreground255", "Background255",
-    "manual_color_handler", "auto_color_handler", "rgb", "rem_colors", "display"
+    "manual_color_handler", "auto_color_handler", "rgb_to_ansi", "rem_colors", "display"
 )
 
 @dataclass
@@ -605,7 +605,7 @@ async def auto_color_handler() -> None:
     if not sys.stdout.isatty():
         return await _delete_colors()
 
-async def rgb(r: int = 0, g: int = 0, b: int = 0, option: typing.Literal["fg", "bg"] = "fg") -> str:
+async def rgb_to_ansi(r: int = 0, g: int = 0, b: int = 0, option: typing.Literal["fg", "bg"] = "fg") -> str:
     """
     Converts RGB values to ANSI colors.
     ### This requires terminal that supports `Truecolor` (24-bit RGB)
