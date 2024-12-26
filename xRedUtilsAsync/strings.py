@@ -6,6 +6,8 @@ This module provides async string manipulation functions.
 - `singularize` - Singularize a given plural word.
 - `string_split` - Splits a string into chunks of specified size.
 - `levenshtein_distance` - Compute the Levenshtein distance between two strings.
+- `hamming_distance` - Calculate the Hamming distance between two strings.
+- `capitalize_words` - Split the `string` into words using split, capitalize each word using capitalize, and join the capitalized words using join.
 
 ### Usage:
 ```py
@@ -16,13 +18,28 @@ from xRedUtilsAsync import strings
 ```
 """
 
-import sys
+import sys, string
 sys.dont_write_bytecode = True
 from typing import Literal, overload
 
+from .iterables import chunker
+
 __all__: tuple[str, ...] = (
-    "pluralize", "string_split", "levenshtein_distance"
+    "ASCII_LETTERS", "ASCII_LOWERCASE", "ASCII_UPPERCASE", "DIGITS", "HEXDIGITS", "OCTDIGITS", "PUNCTUATION", "WHITESPACES"
+    "pluralize", "singularize", "string_split", "levenshtein_distance", "capitalize_words", "hamming_distance"
 )
+
+ASCII_LETTERS: str = string.ascii_letters
+ASCII_LOWERCASE: str = string.ascii_lowercase
+ASCII_UPPERCASE: str = string.ascii_uppercase
+
+BINARY: str = "01"
+DIGITS: str = string.digits
+OCTDIGITS: str = string.octdigits
+HEXDIGITS: str = string.hexdigits
+
+PUNCTUATION: str = string.punctuation
+WHITESPACES: str = string.whitespace
 
 async def pluralize(singular: str) -> str:
     """
@@ -67,11 +84,30 @@ async def singularize(plural: str) -> str:
     return plural
 
 @overload
-async def string_split(string: str, chunk_size: int, option: Literal["normal", "smart"] = "normal") -> list[str]: ...
-@overload
-async def string_split(string: str, chunk_size: int, option: Literal["normal", "smart"] = "normal", _sep: str = " ") -> list[str]: ...
+async def capitalize_words(s: str) -> str: ...
 
-async def string_split(string: str, chunk_size: int, option: Literal["normal", "smart"] = "normal", _sep: str = " ") -> list[str]:
+async def capitalize_words(s: str | list, _sep: str = " ") -> str:
+    """
+    Split the `string` into words using split, capitalize each word using capitalize, and join the capitalized words using join.
+
+    ### Parameters:
+    - `s` - String or list of words to be capitalized.
+    - `_sep` - The separator used for splitting and joining.
+
+    ### Returns:
+    - String, each word capitalized.
+    """
+    if isinstance(s, list | set | tuple | frozenset):
+        s = _sep.join(s)
+    
+    return string.capwords(s, sep=_sep)
+
+@overload
+async def string_split(s: str, chunk_size: int, option: Literal["normal", "smart"] = "normal") -> list[str]: ...
+@overload
+async def string_split(s: str, chunk_size: int, option: Literal["normal", "smart"] = "normal", _sep: str = " ") -> list[str]: ...
+
+async def string_split(s: str, chunk_size: int, option: Literal["normal", "smart"] = "normal", _sep: str = " ") -> list[str]:
     """
     Splits a string into chunks of specified size.
 
@@ -103,7 +139,7 @@ async def string_split(string: str, chunk_size: int, option: Literal["normal", "
         smart_strings: list[str] = []
 
         chunk_list, chunk_counter = [], 0
-        for chunk in string.split(_sep):
+        for chunk in s.split(_sep):
             chunk_len: int = len(chunk) + len(_sep)
 
             if chunk_counter + chunk_len > chunk_size:
@@ -117,7 +153,7 @@ async def string_split(string: str, chunk_size: int, option: Literal["normal", "
 
         return smart_strings
 
-    return [string[i:i + chunk_size] for i in range(0, len(string), chunk_size)]
+    return await chunker(s, chunk_size)
 
 async def levenshtein_distance(string1: str, string2: str) -> int:
     """
@@ -156,3 +192,22 @@ async def levenshtein_distance(string1: str, string2: str) -> int:
         previous_row: list[int] = current_row
     
     return previous_row[-1]
+
+async def hamming_distance(str1: str, str2: str) -> int:
+    """
+    Calculate the Hamming distance between two strings.
+    
+    ### Parameters:
+    - `str1` - First string.
+    - `str2` - Second string.
+    
+    ### Returns:
+    - Hamming distance (integer).
+    
+    ### Raises:
+    - `ValueError` if strings aren't equal length.
+    """
+    if len(str1) != len(str2):
+        raise ValueError("Strings must be of equal length.")
+    
+    return sum(ch1 != ch2 for ch1, ch2 in zip(str1, str2))
