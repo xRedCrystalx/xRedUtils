@@ -8,6 +8,7 @@ This module provides async functions for manipulating with iterables.
 - `compare_iterables` - Compare two iterables and return a list of items that are present in both iterables.
 - `count_occurrences` - Count the number of times a specific item occurs in an iterable.
 - `get_attr_data` - Retrieves attribute data from each object in the iterable. If no attribute was found, ignores the `item`.
+- `chunker` - Slice iterable into chunks of specified size.
 - `to_iterable` - Converts data into a list.
 
 ### Usage:
@@ -25,7 +26,7 @@ sys.dont_write_bytecode = True
 from .type_hints import SIMPLE_ANY, ITERABLE
 
 __all__: tuple[str, ...] = (
-    "flatten_iterable", "remove_items", "remove_type", "compare_iterables", "count_occurrences", "get_attr_data", "to_iterable"
+    "flatten_iterable", "remove_items", "remove_type", "compare_iterables", "count_occurrences", "get_attr_data", "chunker", "to_iterable"
 )
 
 async def flatten_iterable(iterable: ITERABLE) -> list[SIMPLE_ANY]:
@@ -121,6 +122,22 @@ async def get_attr_data(iterable: ITERABLE, attr: str) -> list[SIMPLE_ANY]:
     - `Iterable` of returned attribute data.
     """
     return [data if (data := getattr(item, attr, "_NO_ATTR")) != "_NO_ATTR" else item for item in iterable]
+
+async def chunker(iterable: ITERABLE, chunk_size: int) -> list[list[SIMPLE_ANY]]:
+    """
+    Slice `iterable` into chunks of specified size
+    
+    ### Parameters:
+    - `iterable` - Iterable that will be chunked.
+    - `chunk_size` - Size/num of elements in each chunk.
+
+    ### Returns:
+    - List of lists (chunks).
+    """
+    return [
+        iterable[i:i + chunk_size] 
+        for i in range(0, len(iterable), chunk_size)
+    ]
 
 async def to_iterable(data: SIMPLE_ANY, slice: bool = False) -> list[SIMPLE_ANY]:
     """
