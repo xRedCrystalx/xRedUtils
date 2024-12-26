@@ -17,23 +17,35 @@ from xRedUtilsAsync import errors
 import sys, traceback
 sys.dont_write_bytecode = True
 
-async def full_traceback() -> str:
+__all__: tuple[str, ...] = (
+    "full_traceback", "simple_error",
+    "InvalidRootError", "NetworkError", "DatabaseConnectionError", "AuthorizationError", "ConfigurationError", "FileFormatError", "FileNotFoundError", "RateLimitExceededError",
+    "DataValidationError", "TimeoutError", "ResourceNotFoundError", "DependencyError", "APIError", "ServiceUnavailableError", "InvalidInputError", "OperationNotPermittedError",
+    "IntegrityError", "VersionMismatchError"
+)
+
+async def full_traceback(error: BaseException = None) -> str:
     """
     Generates a full traceback of the current `Exception` as a string.
 
-    Returns:
+    ### Parameters:
+    - `error` - 
+
+    ### Returns:
     - A `string` containing the full traceback information.
     """
-    return traceback.format_exc()
+    return "".join(
+        traceback.format_exception(error or sys.exception())
+    )
 
-async def simple_error() -> str:
+async def simple_error(error: BaseException = None) -> str:
     """
     Formats a simple error message for an exception.
 
     ### Returns:
     - A `string` containing a simple one line error.
     """
-    error: BaseException | None = sys.exception()
+    error: BaseException | None = error or sys.exception()
     return f"{type(error).__name__}: {error}"
 
 class InvalidRootError(ArithmeticError):
