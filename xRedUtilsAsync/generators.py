@@ -8,9 +8,9 @@ This module provides async functions for working with hashes and hashing.
 ### Usage:
 ```py
 
-import xRedUtils.generators as generators
+import xRedUtilsAsync.generators as generators
 or
-from xRedUtils import generators
+from xRedUtilsAsync import generators
 ```
 """
 
