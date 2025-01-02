@@ -22,7 +22,7 @@ import sys
 sys.dont_write_bytecode = True
 from typing import Literal
 
-from .type_hints import NUMBER
+from .type_hints import NUMBER, NUM_ITERABLE
 from .errors import InvalidRootError
 
 __all__: tuple[str, ...] = (
@@ -83,7 +83,7 @@ def value_from_percentage(total: NUMBER, percentage: NUMBER) -> NUMBER:
     """
     return (percentage / 100) * total
 
-def sma(data: list[NUMBER], period: NUMBER) -> list[NUMBER]:
+def sma(data: NUM_ITERABLE, period: NUMBER) -> list[NUMBER]:
     """
     Calculate the Simple Moving Average (SMA).
     
@@ -102,7 +102,7 @@ def sma(data: list[NUMBER], period: NUMBER) -> list[NUMBER]:
     
     return [sum( data[i:i+period] ) / period for i in range(len(data) - period + 1)]
 
-def ema(data: list[NUMBER], period: NUMBER) -> list[NUMBER]:
+def ema(data: NUM_ITERABLE, period: NUMBER) -> list[NUMBER]:
     """
     Calculate the Exponential Moving Average (EMA).
     
@@ -126,7 +126,7 @@ def ema(data: list[NUMBER], period: NUMBER) -> list[NUMBER]:
         ema.append((data[i] - ema[-1]) * multiplier + ema[-1])
     return ema
 
-def isPrime(n) -> bool:
+def isPrime(n: NUMBER) -> bool:
     """
     Check if a number is prime.
     
@@ -146,7 +146,7 @@ def isPrime(n) -> bool:
         return False  # Eliminate multiples of 2 and 3
     
     # Check divisors from 5 to sqrt(n), skipping even numbers
-    for i in range(5, root(n, 2) + 1, 6):
+    for i in range(5, int(root(n, 2) + 1), 6):
         if n % i == 0 or n % (i + 2) == 0:
             return False
     

@@ -155,7 +155,7 @@ async def string_split(s: str, chunk_size: int, option: Literal["normal", "smart
 
     return await chunker(s, chunk_size)
 
-async def levenshtein_distance(string1: str, string2: str) -> int:
+async def levenshtein_distance(str1: str, str2: str) -> int:
     """
     Compute the Levenshtein distance between two strings.
 
@@ -171,19 +171,19 @@ async def levenshtein_distance(string1: str, string2: str) -> int:
     -  The minimum `number` of changes.
     """
     # switch (first argument must be longer than second)
-    if len(string1) < len(string2):
-        return await levenshtein_distance(string2, string1)
+    if len(str1) < len(str2):
+        return await levenshtein_distance(str2, str1)
 
     # if second string is empty, means len(string1) instertions
-    if len(string2) == 0:
-        return len(string1)
+    if len(str2) == 0:
+        return len(str1)
 
-    previous_row: list[int] = range(len(string2) + 1)
+    previous_row: list[int] = range(len(str2) + 1)
     
-    for index1, char1 in enumerate(string1):
+    for index1, char1 in enumerate(str1):
         current_row: list[int] = [index1+1]
 
-        for index2, char2 in enumerate(string2):
+        for index2, char2 in enumerate(str2):
             insertions: int = previous_row[index2+1] + 1
             deletions: int = current_row[index2] + 1
             substitutions: int = previous_row[index2] + (char1 != char2)

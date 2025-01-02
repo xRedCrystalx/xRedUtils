@@ -179,11 +179,11 @@ def get_key(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], value: SIMPLE_ANY) -> SIMP
     ### Returns:
     - Key of the value or `None` if value does not exist in dictionary.  
     """
-    keys, values = dictionary.items()
+    values = tuple(dictionary.values())
 
     try:
         i: int = values.index(value)
-        return keys[i]
+        return tuple(dictionary.keys())[i]
     except:
         return None
 

@@ -76,5 +76,4 @@ async def save_file(path: str, data: SIMPLE_ANY, mode: str = "w", encoder: Liter
             json.dump(data, file, **kwargs)
             return
 
-        #NOTE: maybe for bytes support?
-        file.write(str(data))
+        file.write(data)

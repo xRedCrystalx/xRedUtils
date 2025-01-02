@@ -180,11 +180,24 @@ async def get_key(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], value: SIMPLE_ANY) -
     ### Returns:
     - Key of the value or `None` if value does not exist in dictionary.  
     """
-    keys, values = dictionary.items()
+    """
+    Gets key of specified value.
+    
+    ## ! WARNING !
+    This will find the first value in the dictionary. 
+    
+    ### Parameters:
+    - `dictionary` - The dictionary to search.
+    - `value` - Value to be used for searching.
+
+    ### Returns:
+    - Key of the value or `None` if value does not exist in dictionary.  
+    """
+    values = tuple(dictionary.values())
 
     try:
         i: int = values.index(value)
-        return keys[i]
+        return tuple(dictionary.keys())[i]
     except:
         return None
 
