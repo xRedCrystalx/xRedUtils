@@ -10,6 +10,7 @@ This module provides async functions for working with dictionaries and JSON data
 - `dict_to_json` - Converts a dictionary to a JSON string with optional indentation and additional keyword arguments.
 - `get_value` - Gets value of specified key.
 - `get_key` - Gets key of specified value.
+- `isEmpty` - Checks if the `dict` is empty.
 
 ### Usage:
 ```py
@@ -169,8 +170,8 @@ async def get_key(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], value: SIMPLE_ANY) -
     """
     Gets key of specified value.
     
-    ## ! WARNING !
-    This will find the first value in the dictionary. 
+    #### ! WARNING !
+    #### | This will find the first value in the dictionary. 
     
     ### Parameters:
     - `dictionary` - The dictionary to search.
@@ -186,3 +187,15 @@ async def get_key(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], value: SIMPLE_ANY) -
         return keys[i]
     except:
         return None
+
+async def isEmpty(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY]) -> bool:
+    """
+    Checks if the `dict` is empty.
+
+    ### Parameters:
+    - `dictionary` - The dictionary to check.
+
+    ### Returns:
+    - `True` if empty, otherwise `False`
+    """
+    return len(dictionary.keys()) == 0

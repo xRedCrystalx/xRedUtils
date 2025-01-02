@@ -10,6 +10,7 @@ This module provides functions for working with dictionaries and JSON data.
 - `dict_to_json` - Converts a dictionary to a JSON string with optional indentation and additional keyword arguments.
 - `get_value` - Gets value of specified key.
 - `get_key` - Gets key of specified value.
+- `isEmpty` - Checks if the `dict` is empty.
 
 ### Usage:
 ```py
@@ -185,3 +186,15 @@ def get_key(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], value: SIMPLE_ANY) -> SIMP
         return keys[i]
     except:
         return None
+
+def isEmpty(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY]) -> bool:
+    """
+    Checks if the `dict` is empty.
+
+    ### Parameters:
+    - `dictionary` - The dictionary to check.
+
+    ### Returns:
+    - `True` if empty, otherwise `False`
+    """
+    return len(dictionary.keys()) == 0
