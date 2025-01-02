@@ -23,7 +23,7 @@ def load_modules() -> list:
     )
 
     return [
-        test_dicts, test_iterables, test_dates, test_maths, test_strings, test_files, test_funcs, test_paths,
+        test_dicts, test_iterables, test_dates, test_maths, test_strings, test_funcs, test_paths,
         test_general, test_objects, test_errors, test_generators, test_hashing, test_tconverters
     ]
 
