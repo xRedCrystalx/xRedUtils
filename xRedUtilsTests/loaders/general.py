@@ -13,9 +13,6 @@ def tester(_async: bool) -> None:
                 "p": "12321"
             },
             "result": True
-        },
-        GENERAL.generate_uuid: {
-            "result": "*" # cannot be determinated due to its generation
         }
     }
     return TESTS

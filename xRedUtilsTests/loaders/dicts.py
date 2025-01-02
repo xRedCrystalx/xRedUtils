@@ -72,6 +72,26 @@ def tester(_async: bool) -> None:
                 "dictionary": PRIMARY_DICT
             },
             "result": {'a': 1, 'b_b': 10, 'b_c': 30, 'b_h_l': True, 'q': '14'}
+        },
+        DICTS.get_value: {
+            "kwargs": {
+                "dictionary": PRIMARY_DICT,
+                "key": "q"
+            },
+            "result": "14"
+        },
+        DICTS.get_key: {
+            "kwargs": {
+                "dictionary": PRIMARY_DICT,
+                "value": "14"
+            },
+            "result": "q"
+        },
+        DICTS.isEmpty: {
+            "kwargs": {
+                "dictionary": PRIMARY_DICT
+            },
+            "result": False
         }
     }
     return TESTS

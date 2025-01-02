@@ -1,11 +1,11 @@
-import sys, typing, os, random
+import sys, typing, os
 sys.dont_write_bytecode = True
 
 import xRedUtils.files as sync_files
 import xRedUtilsAsync.files as async_files
 
 CWD: str = os.getcwd()
-FILE: str = random.choice(list(filter(lambda path: os.path.isfile(f"{CWD}/{path}"), os.listdir(CWD))))
+FILE: str = "xRedUtilsTests/file_test.txt"
 
 def tester(_async: bool) -> None:
     FILES = async_files if _async else sync_files

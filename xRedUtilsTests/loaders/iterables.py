@@ -60,6 +60,13 @@ def tester(_async: bool) -> None:
                 "slice": True
             },
             "result" : ["H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d", "!"]
+        },
+        ITERABLES.chunker: {
+            "kwargs": {
+                "iterable": SECONDARY_ITERABLE,
+                "chunk_size": 2
+            },
+            "result" : [["Yes", None], [124, None], [True, False], [id, None]]
         }
     }
     return TESTS

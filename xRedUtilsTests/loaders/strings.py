@@ -10,7 +10,7 @@ def tester(_async: bool) -> None:
     TESTS: dict[typing.Callable, dict] = {
         STRINGS.string_split: {
             "kwargs": {
-                "string": "This is a sample string to be split every nth character intelligently.",
+                "s": "This is a sample string to be split every nth character intelligently.",
                 "chunk_size": 20,
                 "option": "smart"
             },
@@ -27,6 +27,26 @@ def tester(_async: bool) -> None:
                 "plural": "ferrules"
             },
             "result": "ferrule" 
+        },
+        STRINGS.capitalize_words: {
+            "kwargs": {
+                "s": "this is a crazy string"
+            },
+            "result": "This Is A Crazy String" 
+        },
+        STRINGS.levenshtein_distance: {
+            "kwargs": {
+                "str1": "ferrules de ne",
+                "str2": "ferrule di ni" 
+            },
+            "result": 3
+        },
+        STRINGS.hamming_distance: {
+            "kwargs": {
+                "str1": "ferrules de ne",
+                "str2": "ferrules di ni" 
+            },
+            "result": 2
         }
     }
     return TESTS

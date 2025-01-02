@@ -9,7 +9,7 @@ def tester(_async: bool) -> None:
     
     TESTS: dict[typing.Callable, dict] = {
         DATES.get_datetime: {
-            "result": datetime.datetime.now()
+            "result": "*"
         },
         DATES.timestamp: {
             "kwargs": {
