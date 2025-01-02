@@ -1,14 +1,14 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "xRedUtils"
-version = "2.2.0"
+version = "2.3.0"
 authors = [{ name="xRedCrystalx" }]
 description = "Simple, general purpose functions in one place!"
 requires-python = ">=3.12"
-readme = "README.rst"
+readme = "README.md"
 
 classifiers = [
     "Natural Language :: English",
@@ -35,3 +35,6 @@ include = [
     "xRedUtilsTests.loaders"
 ]
 exclude = ["TODO", "NOTES.txt", "assets"]
+
+[tool.setuptools.package-data]
+"xRedUtilsTests" = ["*.txt"]
