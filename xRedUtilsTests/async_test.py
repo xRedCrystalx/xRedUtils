@@ -12,7 +12,6 @@ def load_modules() -> list:
         dates as test_dates,
         maths as test_maths,
         strings as test_strings,
-        files as test_files,
         funcs as test_funcs,
         paths as test_paths,
         general as test_general,
