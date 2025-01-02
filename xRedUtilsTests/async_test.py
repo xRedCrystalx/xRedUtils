@@ -37,6 +37,7 @@ async def main_test() -> None:
             for func, data in (tests or dict()).items():
                 if not await runner(func, result=data.get("result"), *data.get("args", []), **data.get("kwargs", {})):
                     print(f"Failed to run: {func.__qualname__}")
+                    print("--------------------------------")
     else:
         print("All tests complete.")
 
