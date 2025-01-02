@@ -21,7 +21,7 @@ __title__ = "xRedUtils"
 __author__ = "xRedCrystalx"
 __license__ = "MIT"
 __copyright__ = "Copyright 2024-present xRedCrystalx"
-__version__ = "2.3.1"
+__version__ = "2.3.2"
 
 def check_py_version() -> None | SystemError:
     if sys.version_info < (3, 12):

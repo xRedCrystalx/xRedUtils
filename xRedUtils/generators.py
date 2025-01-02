@@ -58,13 +58,13 @@ def generate_string(length: int, upper: bool = True, lower: bool = True, digits:
     """
 
     char_types: dict[bool, str] = {
-        lower: ASCII_LOWERCASE,
-        upper: ASCII_UPPERCASE,
-        digits: DIGITS,
-        puncs: PUNCTUATION,
+        ASCII_LOWERCASE: lower,
+        ASCII_UPPERCASE: upper,
+        DIGITS: digits,
+        PUNCTUATION: puncs,
     }
     
-    chars: str = "".join(value for key, value in char_types.items() if key)
+    chars: str = "".join(key for key, value in char_types.items() if value)
     
     if not chars:
         raise ValueError("At least one character type must be enabled.")
