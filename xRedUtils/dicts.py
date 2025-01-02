@@ -28,7 +28,7 @@ from typing import overload
 from .type_hints import SIMPLE_ANY
 
 __all__: tuple[str, ...] = (
-    "dict_walk", "value_exist", "dict_merge", "flatten_dict", "json_to_dict", "dict_to_json", "get_value", "get_key"
+    "dict_walk", "value_exist", "dict_merge", "flatten_dict", "json_to_dict", "dict_to_json", "get_value", "get_key", "isEmpty"
 )
 
 @overload

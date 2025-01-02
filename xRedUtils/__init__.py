@@ -47,6 +47,7 @@ import xRedUtils.colors as colors
 import xRedUtils.hashing as hashing
 import xRedUtils.generators as generators
 import xRedUtils.type_converters as type_converters
+import xRedUtils.objects as objects
 
 import xRedUtils.modules.reloader as reloader
 

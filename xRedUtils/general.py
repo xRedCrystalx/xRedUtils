@@ -32,17 +32,3 @@ def isPalindrome(p: SIMPLE_ANY) -> bool:
     - `True` if its palindrome, otherwise `False`
     """
     return str(p) == str(p)[::-1]
-
-
-# temp
-def format_number(num: float) -> str:
-    suffixes: list[str] = ['', 'K', 'M', 'B', 'T', 'P', 'E']
-    if num < 1000:
-        return str(num)
-    
-    for i, suffix in enumerate(suffixes):
-        unit = 1000 ** i
-        if num < 1000 ** (i + 1):
-            formatted_num = round(num / unit, 1)
-            return f"{formatted_num}{suffix}"
-    return f"{num:_}"

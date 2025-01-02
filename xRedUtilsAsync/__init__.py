@@ -47,7 +47,7 @@ import xRedUtilsAsync.colors as colors
 import xRedUtilsAsync.hashing as hashing
 import xRedUtilsAsync.generators as generators
 import xRedUtilsAsync.type_converters as type_converters
-
+import xRedUtils.objects as objects
 
 import xRedUtilsAsync.modules.reloader as reloader
 
