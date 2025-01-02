@@ -26,7 +26,7 @@ from types import MethodType
 from .type_hints import SIMPLE_ANY
 
 __all__: tuple[str, ...] = (
-    "get_full_object_path", "get_object_module_path", "get_object_name", "get_inheritance_layers", "get_all_running_objects"
+    "get_full_object_path", "get_object_module_path", "get_object_name", "extract_attributes", "get_inheritance_layers", "get_all_running_objects"
 )
 
 async def get_full_object_path(obj: object | MethodType | type) -> str:

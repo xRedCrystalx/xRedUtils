@@ -21,11 +21,12 @@ from xRedUtils import hashing
 
 import sys, hashlib, io
 sys.dont_write_bytecode = True
-from typing import Literal, overload
+from typing import Literal
 
 from .generators import generate_string
 
 __all__: tuple[str, ...] = (
+    "AVAILABLE_ALGORITHMS"
     "random_hash", "create_hash", "file_hash"
 )
 

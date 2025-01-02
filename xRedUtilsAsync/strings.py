@@ -25,7 +25,7 @@ from typing import Literal, overload
 from .iterables import chunker
 
 __all__: tuple[str, ...] = (
-    "ASCII_LETTERS", "ASCII_LOWERCASE", "ASCII_UPPERCASE", "DIGITS", "HEXDIGITS", "OCTDIGITS", "PUNCTUATION", "WHITESPACES"
+    "ASCII_LETTERS", "ASCII_LOWERCASE", "ASCII_UPPERCASE", "BINARY", "DIGITS", "HEXDIGITS", "OCTDIGITS", "PUNCTUATION", "WHITESPACES"
     "pluralize", "singularize", "string_split", "levenshtein_distance", "capitalize_words", "hamming_distance"
 )
 

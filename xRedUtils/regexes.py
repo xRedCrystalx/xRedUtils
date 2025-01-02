@@ -13,6 +13,10 @@ from xRedUtils import regexes
 import sys, re
 sys.dont_write_bytecode = True
 
+__all__: tuple[str, ...] = (
+    "ANSI_PATTERN", "URL_PATTERN", "DATE_PATTERN", "IPv4_PATTERN", "IPv6_PATTERN", "MAC_ADDR_PATTERN"
+)
+
 ANSI_PATTERN: re.Pattern[str] = re.compile(r"(?:\x1B\[|\x9B)[0-?]*[ -\/]*[@-~]", re.IGNORECASE)
 URL_PATTERN: re.Pattern[str] = re.compile(r"\bhttps?://\S+\b")
 DATE_PATTERN: re.Pattern[str] = re.compile(r"\d{4}-\d{2}-\d{2}") #YYYY-MM-DD

@@ -23,6 +23,11 @@ sys.dont_write_bytecode = True
 from .type_hints import  NUMBER, NUMBER_DICT
 from .strings import pluralize, singularize
 
+__all__: tuple[str, ...] = (
+    "UNITS", "TIME_UNITS",
+    "convert_to_seconds", "seconds_to_str", "str_to_seconds"
+)
+
 TIME_UNITS: NUMBER_DICT = {
     "second": 1,
     "minute": 60,
@@ -35,11 +40,6 @@ TIME_UNITS: NUMBER_DICT = {
     "century": 3_155_673_600,
     "millenium": 31_556_908_800
 }
-
-__all__: tuple[str, ...] = (
-    "UNITS", "TIME_UNITS",
-    "convert_to_seconds", "seconds_to_str", "str_to_seconds"
-)
 
 OPTIONS = typing.Literal["second", "minute", "hour", "day", "week", "month", "year", "decade", "century", "millenium"]
 
