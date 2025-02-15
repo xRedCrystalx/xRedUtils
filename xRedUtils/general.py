@@ -1,6 +1,9 @@
 """
 General - not yet organized variables and functions.
 
+### CONSTANTS:
+- `TIME_UNITS` - Conversion from `str` to `int` eg. `"minute": 60`
+
 ### Functions:
 - `isPalindrome` - Checks if the `string` representation of any datatype is palindrome.
 
@@ -15,13 +18,27 @@ from xRedUtils import general
 
 import sys
 sys.dont_write_bytecode = True
-from .type_hints import SIMPLE_ANY
+from .annotations import Any
 
 __all__: tuple[str, ...] = (
+    "TIME_UNITS",
     "isPalindrome"
 )
 
-def isPalindrome(p: SIMPLE_ANY) -> bool:
+TIME_UNITS: dict[str, int] = {
+    "second": 1,
+    "minute": 60,
+    "hour": 3_600,
+    "day": 86_400,
+    "week": 604_800,
+    "month": 2_592_000,          # 30 days
+    "year": 31_536_000,          # actual 365 days
+    "decade": 315_532_800,
+    "century": 3_155_673_600,
+    "millenium": 31_556_908_800
+}
+
+def isPalindrome(p: Any) -> bool:
     """
     Checks if the `string` representation of any datatype is palindrome.
 
