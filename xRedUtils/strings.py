@@ -123,11 +123,13 @@ def string_split(s: str | Iterable[str], chunk_size: int, option: Literal["norma
     ```
 
     ### Parameters:
-    - `string` - The input string to be split.
+    - `s` - The input string or list of strings to be split.
     - `chunk_size` - The size of each chunk.
     - `option` - The splitting option. Default is `normal`.
     - `_sep` - The separator used for splitting. Default is `" "` (space).
 
+    #### NOTE: list of strings will be used as already split string. (Function won't split on `_sep`, but will however join them.)
+    
     ### Returns:
     -  A `list of strings`, each representing a chunk of the original string.
     """
@@ -138,7 +140,8 @@ def string_split(s: str | Iterable[str], chunk_size: int, option: Literal["norma
         smart_strings: list[str] = []
 
         chunk_list, chunk_counter = [], 0
-        for chunk in s.split(_sep):
+        
+        for chunk in (s.split(_sep) if isinstance(s, str) else s):
             chunk_len: int = len(chunk) + len(_sep)
 
             if chunk_counter + chunk_len > chunk_size:
@@ -152,7 +155,7 @@ def string_split(s: str | Iterable[str], chunk_size: int, option: Literal["norma
 
         return smart_strings
 
-    return chunker(s, chunk_size)
+    return list(chunker(s, chunk_size))
 
 def levenshtein_distance(str1: str, str2: str) -> int:
     """
