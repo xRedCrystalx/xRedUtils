@@ -23,20 +23,18 @@ from xRedUtilsAsync import dicts
 
 import sys, json, io
 sys.dont_write_bytecode = True
-from typing import overload
-
-from .type_hints import SIMPLE_ANY
+from .annotations import Iterator, Hashable, Any, overload
 
 __all__: tuple[str, ...] = (
     "dict_walk", "value_exist", "dict_merge", "flatten_dict", "json_to_dict", "dict_to_json", "get_value", "get_key", "isEmpty"
 )
 
 @overload
-async def dict_walk(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], path: str | list[str], _sep: str = ".") -> SIMPLE_ANY: ...
+async def dict_walk(dictionary: dict[Hashable, Any], path: str | list[str], _sep: str = ".") -> Any: ...
 @overload
-async def dict_walk(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], path: str | list[str], _sep: str = ".", _slice: slice = slice(None, None)) -> SIMPLE_ANY: ...
+async def dict_walk(dictionary: dict[Hashable, Any], path: str | list[str], _sep: str = ".", _slice: slice = slice(None, None)) -> Any: ...
 
-async def dict_walk(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], path: str | list[str], _sep: str = ".", _slice: slice = slice(None, None)) -> SIMPLE_ANY:
+async def dict_walk(dictionary: dict[Hashable, Any], path: str | list[str], _sep: str = ".", _slice: slice = slice(None, None)) -> Any:
     """
     Recursively walks through a dictionary to retrieve a value specified by a given path.
 
@@ -53,7 +51,7 @@ async def dict_walk(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], path: str | list[s
     ### Raises:
     - `MemoryError` - If the specified path cannot be found within the dictionary.
     """
-    current: dict[SIMPLE_ANY, SIMPLE_ANY] = dictionary
+    current: dict[Hashable, Any] = dictionary
     path = path.split(_sep) if isinstance(path, str) else path
 
     for key in path[_slice]:
@@ -64,7 +62,7 @@ async def dict_walk(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], path: str | list[s
 
     return current
 
-async def value_exist(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], path: str | list[str], **kwargs) -> bool:
+async def value_exist(dictionary: dict[Hashable, Any], path: str | list[str], **kwargs) -> bool:
     """
     Checks whether a value exists within a dictionary at the specified path.
 
@@ -82,7 +80,7 @@ async def value_exist(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], path: str | list
     except:
         return False
 
-async def dict_merge(dict1, dict2) -> dict[SIMPLE_ANY, SIMPLE_ANY]:
+async def dict_merge(dict1, dict2) -> dict[Hashable, Any]:
     """
     Merges two dictionaries.
 
@@ -96,11 +94,11 @@ async def dict_merge(dict1, dict2) -> dict[SIMPLE_ANY, SIMPLE_ANY]:
     return dict1 | dict2
 
 @overload
-async def flatten_dict(dictionary: dict[str, SIMPLE_ANY], _sep: str= "_") -> dict[str, SIMPLE_ANY]: ...
+async def flatten_dict(dictionary: dict[str, Any], _sep: str= "_") -> dict[str, Any]: ...
 @overload
-async def flatten_dict(dictionary: dict[str, SIMPLE_ANY], _sep: str= "_", _parent_key="") -> dict[str, SIMPLE_ANY]: ...
+async def flatten_dict(dictionary: dict[str, Any], _sep: str= "_", _parent_key="") -> dict[str, Any]: ...
 
-async def flatten_dict(dictionary: dict[str, SIMPLE_ANY], _sep: str= "_", _parent_key="") -> dict[str, SIMPLE_ANY]:
+async def flatten_dict(dictionary: dict[str, Any], _sep: str= "_", _parent_key="") -> dict[str, Any]:
     """
     Flattens a nested dictionary into a single-level dictionary.
 
@@ -113,18 +111,18 @@ async def flatten_dict(dictionary: dict[str, SIMPLE_ANY], _sep: str= "_", _paren
     - A single-level `dictionary` where nested keys are joined with the separator.
     """
 
-    items: dict[str, SIMPLE_ANY] = {}
+    items: dict[str, Any] = {}
     
     for k, v in dictionary.items():
         new_key: str = f"{_parent_key}{_sep}{k}" if _parent_key else k
         if isinstance(v, dict):
-            flatten: dict[str, SIMPLE_ANY] = await flatten_dict(v, _sep=_sep, _parent_key=new_key)
+            flatten: dict[str, Any] = await flatten_dict(v, _sep=_sep, _parent_key=new_key)
             items.update(flatten.items())
         else:
             items[new_key] = v
     return items
 
-async def json_to_dict(d: bytes | str | bytearray | io.TextIOWrapper, **kwargs) -> dict[str, SIMPLE_ANY]:
+async def json_to_dict(d: bytes | str | bytearray | io.TextIOWrapper, **kwargs) -> dict[str, Any]:
     """
     Converts JSON data to a Python dictionary.
 
@@ -139,7 +137,7 @@ async def json_to_dict(d: bytes | str | bytearray | io.TextIOWrapper, **kwargs) 
         d = d.read()
     return json.loads(d, **kwargs)
 
-async def dict_to_json(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], indent: int = 4, **kwargs) -> str:
+async def dict_to_json(dictionary: dict[str, Any], indent: int = 4, **kwargs) -> str:
     """
     Converts a dictionary to a JSON string with optional indentation and additional keyword arguments.
 
@@ -153,7 +151,7 @@ async def dict_to_json(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], indent: int = 4
     """
     return json.dumps(dictionary, indent=indent, **kwargs)
 
-async def get_value(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], key: SIMPLE_ANY) -> SIMPLE_ANY | None:  
+async def get_value(dictionary: dict[Hashable, Any], key: Any) -> Any | None:  
     """
     Gets value of specified key.
 
@@ -166,20 +164,7 @@ async def get_value(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], key: SIMPLE_ANY) -
     """
     return dictionary.get(key)
 
-async def get_key(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], value: SIMPLE_ANY) -> SIMPLE_ANY | None:
-    """
-    Gets key of specified value.
-    
-    #### ! WARNING !
-    #### | This will find the first value in the dictionary. 
-    
-    ### Parameters:
-    - `dictionary` - The dictionary to search.
-    - `value` - Value to be used for searching.
-
-    ### Returns:
-    - Key of the value or `None` if value does not exist in dictionary.  
-    """
+async def get_key(dictionary: dict[Hashable, Any], value: Any) -> Any | None:
     """
     Gets key of specified value.
     
@@ -193,15 +178,22 @@ async def get_key(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY], value: SIMPLE_ANY) -
     ### Returns:
     - Key of the value or `None` if value does not exist in dictionary.  
     """
+    # iter on dict only returns keys, so no point in optimizing that
     values = tuple(dictionary.values())
 
     try:
-        i: int = values.index(value)
-        return tuple(dictionary.keys())[i]
+        index: int = values.index(value)
+        key_iterator: Iterator[Hashable] = iter(dictionary)
+
+        # moves until index -1
+        for _ in range(index):
+            next(key_iterator)
+        else:
+            return next(key_iterator)
     except:
         return None
 
-async def isEmpty(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY]) -> bool:
+async def isEmpty(dictionary: dict[Hashable, Any]) -> bool:
     """
     Checks if the `dict` is empty.
 
@@ -211,4 +203,9 @@ async def isEmpty(dictionary: dict[SIMPLE_ANY, SIMPLE_ANY]) -> bool:
     ### Returns:
     - `True` if empty, otherwise `False`
     """
-    return len(dictionary.keys()) == 0
+    # next() throws error if there is nothing in iter, optimized way
+    try:
+        next(iter(dictionary))
+        return False
+    except:
+        return True
