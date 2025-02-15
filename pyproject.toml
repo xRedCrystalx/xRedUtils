@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "xRedUtils"
-version = "2.3.2"
+version = "2.4.0"
 authors = [{ name="xRedCrystalx" }]
 description = "Simple, general purpose functions in one place!"
 requires-python = ">=3.12"
@@ -28,9 +28,7 @@ Issues = "https://github.com/xRedCrystalx/xRedUtils/issues"
 [tool.setuptools.packages.find]
 include = [
     "xRedUtils",
-    "xRedUtils.modules",
     "xRedUtilsAsync",
-    "xRedUtilsAsync.modules",
     "xRedUtilsTests",
     "xRedUtilsTests.loaders"
 ]
