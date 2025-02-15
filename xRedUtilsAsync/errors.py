@@ -48,6 +48,7 @@ async def simple_error(error: BaseException = None) -> str:
     error: BaseException | None = error or sys.exception()
     return f"{type(error).__name__}: {error}"
 
+
 class InvalidRootError(ArithmeticError):
     """Exception raised for mathematical roots"""
     pass
