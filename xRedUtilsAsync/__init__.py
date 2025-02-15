@@ -21,7 +21,7 @@ __title__ = "xRedUtilsAsync"
 __author__ = "xRedCrystalx"
 __license__ = "MIT"
 __copyright__ = "Copyright 2024-present xRedCrystalx"
-__version__ = "2.3.2"
+__version__ = "2.4.0"
 
 def check_py_version() -> None | SystemError:
     if sys.version_info < (3, 12):
@@ -29,27 +29,27 @@ def check_py_version() -> None | SystemError:
 
 check_py_version()
 
+import xRedUtilsAsync.annotations as annotations
+import xRedUtilsAsync.cache as cache
+import xRedUtilsAsync.colors as colors
 import xRedUtilsAsync.dates as dates
 import xRedUtilsAsync.dicts as dicts
 import xRedUtilsAsync.errors as errors
-import xRedUtilsAsync.funcs as functions
-import xRedUtilsAsync.system as system
-import xRedUtilsAsync.maths as maths
-import xRedUtilsAsync.regexes as regex
-import xRedUtilsAsync.iterables as iterables
-import xRedUtilsAsync.times as time
-import xRedUtilsAsync.type_hints as typehints
-import xRedUtilsAsync.strings as strings
 import xRedUtilsAsync.files as files
-import xRedUtilsAsync.paths as paths
+import xRedUtilsAsync.funcs as funcs
 import xRedUtilsAsync.general as general
-import xRedUtilsAsync.colors as colors
-import xRedUtilsAsync.hashing as hashing
 import xRedUtilsAsync.generators as generators
-import xRedUtilsAsync.type_converters as type_converters
+import xRedUtilsAsync.hashing as hashing
+import xRedUtilsAsync.iterables as iterables
+import xRedUtilsAsync.maths as maths
+import xRedUtilsAsync.modules as modules
 import xRedUtils.objects as objects
-
-import xRedUtilsAsync.modules.reloader as reloader
+import xRedUtilsAsync.paths as paths
+import xRedUtilsAsync.regexes as regexes
+import xRedUtilsAsync.strings as strings
+import xRedUtilsAsync.system as system
+import xRedUtilsAsync.times as time
+import xRedUtilsAsync.type_converters as type_converters
 
 from xRedUtilsTests.async_test import main_test
 
