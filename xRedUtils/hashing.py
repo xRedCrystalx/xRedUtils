@@ -21,8 +21,7 @@ from xRedUtils import hashing
 
 import sys, hashlib, io
 sys.dont_write_bytecode = True
-from typing import Literal
-
+from .annotations import Literal
 from .generators import generate_string
 
 __all__: tuple[str, ...] = (
@@ -89,4 +88,3 @@ def file_hash(algorithm: _LIT_ALGO, file_path_or_io: str | io.BufferedReader) ->
             return hashlib.file_digest(f, algorithm).digest()
     
     return hashlib.file_digest(file_path_or_io, algorithm).digest()
-    

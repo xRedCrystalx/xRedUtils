@@ -21,8 +21,7 @@ from xRedUtilsAsync import hashing
 
 import sys, hashlib, io
 sys.dont_write_bytecode = True
-from typing import Literal
-
+from .annotations import Literal
 from .generators import generate_string
 
 __all__: tuple[str, ...] = (
@@ -46,7 +45,6 @@ async def random_hash(algorithm: _LIT_ALGO, length: int = 16, _enc: str = "utf-8
     ### Returns:
     - `Bytes` presentation of hash. (use `.hex()` to convert it to hexstring)
     """
-
     string: str = await generate_string(length)
     return hashlib.new(algorithm, string.encode(_enc)).digest()
 
@@ -90,4 +88,3 @@ async def file_hash(algorithm: _LIT_ALGO, file_path_or_io: str | io.BufferedRead
             return hashlib.file_digest(f, algorithm).digest()
     
     return hashlib.file_digest(file_path_or_io, algorithm).digest()
-    

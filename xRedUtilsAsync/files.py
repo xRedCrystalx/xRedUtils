@@ -16,9 +16,7 @@ from xRedUtilsAsync import files
 
 import sys, json
 sys.dont_write_bytecode = True
-
-from typing import overload, Literal
-from .type_hints import SIMPLE_ANY
+from .annotations import Any, overload, Literal
 from .dicts import json_to_dict
 
 __all__: tuple[str, ...] = (
@@ -28,9 +26,9 @@ __all__: tuple[str, ...] = (
 @overload
 async def open_file(path: str, encoding: str = "utf-8", mode: Literal["r", "rb"] = "r", **kwargs) -> str: ...
 @overload
-async def open_file(path: str, encoding: str = "utf-8", mode: Literal["r", "rb"] = "r", decoder: Literal["json"] | None = None, **kwargs) -> dict[str, SIMPLE_ANY]: ...
+async def open_file(path: str, encoding: str = "utf-8", mode: Literal["r", "rb"] = "r", decoder: Literal["json"] | None = None, **kwargs) -> dict[str, Any]: ...
 
-async def open_file(path: str, encoding: str = "utf-8", mode: Literal["r", "rb"] = "r", decoder: Literal["json"] | None = None, **kwargs) -> dict[str, SIMPLE_ANY]:
+async def open_file(path: str, encoding: str = "utf-8", mode: Literal["r", "rb"] = "r", decoder: Literal["json"] | None = None, **kwargs) -> dict[str, Any]:
     """
     Opens any existing file provided by the path.
 
@@ -52,11 +50,11 @@ async def open_file(path: str, encoding: str = "utf-8", mode: Literal["r", "rb"]
         return file.read()
 
 @overload
-async def save_file(path: str, data: SIMPLE_ANY, mode: str = "w") -> None: ...
+async def save_file(path: str, data: Any, mode: str = "w") -> None: ...
 @overload
-async def save_file(path: str, data: SIMPLE_ANY, mode: str = "w", encoder: Literal["json"] | None = None, **kwargs) -> None: ...
+async def save_file(path: str, data: Any, mode: str = "w", encoder: Literal["json"] | None = None, **kwargs) -> None: ...
 
-async def save_file(path: str, data: SIMPLE_ANY, mode: str = "w", encoder: Literal["json"] | None = None, **kwargs) -> None:
+async def save_file(path: str, data: Any, mode: str = "w", encoder: Literal["json"] | None = None, **kwargs) -> None:
     """
     Saves any data to existing or not existing file provided by the path.
 

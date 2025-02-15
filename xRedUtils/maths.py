@@ -20,9 +20,7 @@ from xRedUtils import maths
 
 import sys
 sys.dont_write_bytecode = True
-from typing import Literal
-
-from .type_hints import NUMBER, NUM_ITERABLE
+from .annotations import NUMBER, Iterable, Literal
 from .errors import InvalidRootError
 
 __all__: tuple[str, ...] = (
@@ -83,7 +81,7 @@ def value_from_percentage(total: NUMBER, percentage: NUMBER) -> NUMBER:
     """
     return (percentage / 100) * total
 
-def sma(data: NUM_ITERABLE, period: NUMBER) -> list[NUMBER]:
+def sma(data: Iterable[NUMBER], period: NUMBER) -> list[NUMBER]:
     """
     Calculate the Simple Moving Average (SMA).
     
@@ -102,7 +100,7 @@ def sma(data: NUM_ITERABLE, period: NUMBER) -> list[NUMBER]:
     
     return [sum( data[i:i+period] ) / period for i in range(len(data) - period + 1)]
 
-def ema(data: NUM_ITERABLE, period: NUMBER) -> list[NUMBER]:
+def ema(data: Iterable[NUMBER], period: NUMBER) -> list[NUMBER]:
     """
     Calculate the Exponential Moving Average (EMA).
     

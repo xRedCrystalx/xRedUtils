@@ -26,14 +26,14 @@ from xRedUtils import type_converters
 
 import sys
 sys.dont_write_bytecode = True
-from .type_hints import SIMPLE_ANY
+from .annotations import Any
 
 __all__: tuple[str, ...] = (
     "to_str", "to_int", "to_float", "to_bool", "to_tuple", "to_list", "to_dict", "to_set",
     "to_frozen_set", "to_bytes", "to_byte_array", "to_none"
 )
 
-def to_str(obj: SIMPLE_ANY) -> str | SIMPLE_ANY:
+def to_str(obj: Any) -> str | Any:
     """
     Tries to convert given object to string.
     
@@ -46,7 +46,7 @@ def to_str(obj: SIMPLE_ANY) -> str | SIMPLE_ANY:
     try: return str(obj)
     except: return obj
 
-def to_int(obj: SIMPLE_ANY) -> int | SIMPLE_ANY:
+def to_int(obj: Any) -> int | Any:
     """
     Tries to convert given object to integer.
     
@@ -59,7 +59,7 @@ def to_int(obj: SIMPLE_ANY) -> int | SIMPLE_ANY:
     try: return int(obj)
     except: return obj
 
-def to_float(obj: SIMPLE_ANY) -> float | SIMPLE_ANY:
+def to_float(obj: Any) -> float | Any:
     """
     Tries to convert given object to float.
     
@@ -72,7 +72,7 @@ def to_float(obj: SIMPLE_ANY) -> float | SIMPLE_ANY:
     try: return float(obj)
     except: return obj
 
-def to_bool(obj: SIMPLE_ANY) -> bool | SIMPLE_ANY:
+def to_bool(obj: Any) -> bool | Any:
     """
     Tries to convert given object to boolean.
     
@@ -85,7 +85,7 @@ def to_bool(obj: SIMPLE_ANY) -> bool | SIMPLE_ANY:
     try: return bool(obj)
     except: return obj
 
-def to_tuple(obj: SIMPLE_ANY) -> tuple | SIMPLE_ANY:
+def to_tuple(obj: Any) -> tuple | Any:
     """
     Tries to convert given object to tuple.
     
@@ -98,7 +98,7 @@ def to_tuple(obj: SIMPLE_ANY) -> tuple | SIMPLE_ANY:
     try: return tuple(obj)
     except: return obj
 
-def to_list(obj: SIMPLE_ANY) -> list | SIMPLE_ANY:
+def to_list(obj: Any) -> list | Any:
     """
     Tries to convert given object to list.
     
@@ -111,7 +111,7 @@ def to_list(obj: SIMPLE_ANY) -> list | SIMPLE_ANY:
     try: return list(obj)
     except: return obj
 
-def to_dict(obj: SIMPLE_ANY) -> dict | SIMPLE_ANY:
+def to_dict(obj: Any) -> dict | Any:
     """
     Tries to convert given object to dictionary.
     
@@ -124,7 +124,7 @@ def to_dict(obj: SIMPLE_ANY) -> dict | SIMPLE_ANY:
     try: return dict(obj)
     except: return obj
 
-def to_set(obj: SIMPLE_ANY) -> set | SIMPLE_ANY:
+def to_set(obj: Any) -> set | Any:
     """
     Tries to convert given object to set.
     
@@ -137,7 +137,7 @@ def to_set(obj: SIMPLE_ANY) -> set | SIMPLE_ANY:
     try: return set(obj)
     except: return obj
 
-def to_frozen_set(obj: SIMPLE_ANY) -> frozenset | SIMPLE_ANY:
+def to_frozen_set(obj: Any) -> frozenset | Any:
     """
     Tries to convert given object to frozen set.
     
@@ -150,7 +150,7 @@ def to_frozen_set(obj: SIMPLE_ANY) -> frozenset | SIMPLE_ANY:
     try: return frozenset(obj)
     except: return obj
 
-def to_bytes(obj: SIMPLE_ANY, *args, **kwargs) -> bytes | SIMPLE_ANY:
+def to_bytes(obj: Any, *args, **kwargs) -> bytes | Any:
     """
     Tries to convert given object to bytes.
     
@@ -165,7 +165,7 @@ def to_bytes(obj: SIMPLE_ANY, *args, **kwargs) -> bytes | SIMPLE_ANY:
     try: return bytes(obj, *args, **kwargs)
     except: return obj
 
-def to_byte_array(obj: SIMPLE_ANY, *args, **kwargs) -> bytearray | SIMPLE_ANY:
+def to_byte_array(obj: Any, *args, **kwargs) -> bytearray | Any:
     """
     Tries to convert given object to bytearray.
     
@@ -181,7 +181,7 @@ def to_byte_array(obj: SIMPLE_ANY, *args, **kwargs) -> bytearray | SIMPLE_ANY:
     except: return obj
 
 
-def to_none(obj: SIMPLE_ANY) -> None:
+def to_none(obj: Any) -> None:
     """
     Always returns `None`.
     """

@@ -16,8 +16,7 @@ from xRedUtilsAsync import generators
 
 import sys, random, uuid
 sys.dont_write_bytecode = True
-from typing import Literal, overload
-
+from .annotations import overload
 from .strings import ASCII_LOWERCASE, ASCII_UPPERCASE, PUNCTUATION, DIGITS
 
 __all__: tuple[str, ...] = (

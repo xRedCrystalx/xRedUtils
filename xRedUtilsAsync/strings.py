@@ -20,8 +20,7 @@ from xRedUtilsAsync import strings
 
 import sys, string
 sys.dont_write_bytecode = True
-from typing import Literal, overload
-
+from .annotations import Literal, overload, Iterable, ITERABLE
 from .iterables import chunker
 
 __all__: tuple[str, ...] = (
@@ -97,17 +96,17 @@ async def capitalize_words(s: str | list, _sep: str = " ") -> str:
     ### Returns:
     - String, each word capitalized.
     """
-    if isinstance(s, list | set | tuple | frozenset):
+    if isinstance(s, ITERABLE):
         s = _sep.join(s)
     
     return string.capwords(s, sep=_sep)
 
 @overload
-async def string_split(s: str, chunk_size: int, option: Literal["normal", "smart"] = "normal") -> list[str]: ...
+async def string_split(s: str | Iterable[str], chunk_size: int, option: Literal["normal", "smart"] = "normal") -> list[str]: ...
 @overload
-async def string_split(s: str, chunk_size: int, option: Literal["normal", "smart"] = "normal", _sep: str = " ") -> list[str]: ...
+async def string_split(s: str | Iterable[str], chunk_size: int, option: Literal["normal", "smart"] = "normal", _sep: str = " ") -> list[str]: ...
 
-async def string_split(s: str, chunk_size: int, option: Literal["normal", "smart"] = "normal", _sep: str = " ") -> list[str]:
+async def string_split(s: str | Iterable[str], chunk_size: int, option: Literal["normal", "smart"] = "normal", _sep: str = " ") -> list[str]:
     """
     Splits a string into chunks of specified size.
 
@@ -174,7 +173,7 @@ async def levenshtein_distance(str1: str, str2: str) -> int:
     if len(str1) < len(str2):
         return await levenshtein_distance(str2, str1)
 
-    # if second string is empty, means len(string1) instertions
+    # if second string is empty, means len(string1) insertions
     if len(str2) == 0:
         return len(str1)
 

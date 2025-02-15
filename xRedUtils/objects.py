@@ -20,9 +20,7 @@ from xRedUtils import objects
 
 import sys, gc
 sys.dont_write_bytecode = True
-from types import MethodType
-
-from .type_hints import SIMPLE_ANY
+from .annotations import Any, MethodType
 
 __all__: tuple[str, ...] = (
     "get_full_object_path", "get_object_module_path", "get_object_name", "extract_attributes", "get_inheritance_layers", "get_all_running_objects"
@@ -33,7 +31,7 @@ def get_full_object_path(obj: object | MethodType | type) -> str:
     Finds full python path of the object, object method or type.
 
     ### Parameters:
-    - `obj` - (Called) object, object method or type to check. 
+    - `obj` - Object, object method or type to check. 
 
     ### Returns:
     - Full python path of the object.
@@ -48,7 +46,7 @@ def get_object_module_path(obj: object | MethodType | type) -> str:
     Finds object's module python path.
 
     ### Parameters:
-    - `obj` - (Called) object, object method or type to check. 
+    - `obj` - Object, object method or type to check. 
 
     ### Returns:
     - Module python path.
@@ -60,19 +58,19 @@ def get_object_name(obj: type | object) -> str:
     Finds object's name.
 
     ### Parameters:
-    - `obj` - (Called) object or type to check. 
+    - `obj` - Object or type to check. 
 
     ### Returns:
     - Name of object.
     """
     return obj.__name__
 
-def extract_attributes(obj: object) -> dict[str, SIMPLE_ANY]:
+def extract_attributes(obj: object) -> dict[str, Any]:
     """
     Extract all attributes from an object and return as a dictionary.
 
     ### Parameters:
-    - `obj` - (Called) object.
+    - `obj` - Object to extract attributes from.
 
     ### Returns:
     - Dictionary with `attr: value`.

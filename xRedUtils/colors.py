@@ -31,10 +31,12 @@ from xRedUtils import colors
 ```
 """
 
-import sys, typing
+import sys
 sys.dont_write_bytecode = True
 from dataclasses import dataclass, asdict
+
 from .regexes import ANSI_PATTERN
+from .annotations import Literal
 
 __all__: tuple[str, ...] = (
     "Style", "Foreground16", "Background16", "Foreground255", "Background255",
@@ -605,7 +607,7 @@ def auto_color_handler() -> None:
     if not sys.stdout.isatty():
         return _delete_colors()
 
-def rgb_to_ansi(r: int = 0, g: int = 0, b: int = 0, option: typing.Literal["fg", "bg"] = "fg") -> str:
+def rgb_to_ansi(r: int = 0, g: int = 0, b: int = 0, option: Literal["fg", "bg"] = "fg") -> str:
     """
     Converts RGB values to ANSI colors.
     ### This requires terminal that supports `Truecolor` (24-bit RGB)
