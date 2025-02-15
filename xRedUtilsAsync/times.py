@@ -6,10 +6,6 @@ This module provides async functions for converting time values between differen
 - `seconds_to_str` - Converts a time duration in seconds to a human-readable string format.
 - `str_to_seconds` - Converts a human-readable time string to its equivalent duration in seconds.
 
-### Constants:
-- `UNITS` - A dictionary mapping time units to their conversion factors in seconds.
-- `OPTIONS` - Literal type containing valid time unit options for conversion.
-
 ### Usage:
 ```py
 
@@ -19,30 +15,17 @@ from xRedUtilsAsync import times
 ```
 """
 
-import sys, typing
+import sys
 sys.dont_write_bytecode = True
-
-from .type_hints import NUMBER_DICT, NUMBER
+from .annotations import NUMBER, Literal
 from .strings import pluralize, singularize
+from .general import TIME_UNITS
 
 __all__: tuple[str, ...] = (
-    "UNITS", "OPTIONS",
     "convert_to_seconds", "seconds_to_str", "str_to_seconds"
 )
 
-UNITS: NUMBER_DICT = {
-    "second": 1,
-    "minute": 60,
-    "hour": 3_600,
-    "day": 86_400,
-    "week": 604_800,
-    "month": 2_592_000,          # 30 days
-    "year": 31_536_000,          # actual 365 days
-    "decade": 315_532_800,
-    "century": 3_155_673_600,
-    "millenium": 31_556_908_800
-}
-OPTIONS = typing.Literal["second", "minute", "hour", "day", "week", "month", "year", "decade", "century", "millenium"]
+OPTIONS = Literal["second", "minute", "hour", "day", "week", "month", "year", "decade", "century", "millenium"]
 
 async def convert_to_seconds(value: NUMBER, option: OPTIONS) -> NUMBER:
     """
@@ -55,7 +38,7 @@ async def convert_to_seconds(value: NUMBER, option: OPTIONS) -> NUMBER:
     ### Returns:
     - The equivalent time value in seconds as `NUMBER`.
     """
-    if not (multiplicator := UNITS.get(option)):
+    if not (multiplicator := TIME_UNITS.get(option)):
         return 0
     return value * multiplicator
 
@@ -72,9 +55,9 @@ async def seconds_to_str(seconds: int, _sep: str = ", ") -> str:
     """
     components: list[str] = []
 
-    for unit in reversed(UNITS.keys()):
-        if seconds >= UNITS[unit]:
-            count, seconds = divmod(seconds, UNITS[unit])
+    for unit in reversed(TIME_UNITS.keys()):
+        if seconds >= TIME_UNITS.get(unit, 0):
+            count, seconds = divmod(seconds, TIME_UNITS.get(unit, 1))
             components.append(f"{count} {await pluralize(unit) if count != 1 else unit}")
 
     return _sep.join(components) if components else "0 seconds"
@@ -95,6 +78,6 @@ async def str_to_seconds(time_string: str, _sep: str = ", ") -> int:
 
     for comp in components:
         count, unit = comp.split(" ") or (0, "second")
-        total_seconds += int(count) * UNITS[await singularize(unit)]
+        total_seconds += int(count) * TIME_UNITS.get(await singularize(unit), 0)
 
     return total_seconds

@@ -6,42 +6,26 @@ This module provides functions for converting time values between different unit
 - `seconds_to_str` - Converts a time duration in seconds to a human-readable string format.
 - `str_to_seconds` - Converts a human-readable time string to its equivalent duration in seconds.
 
-### Constants:
-- `UNITS` - A dictionary mapping time units to their conversion factors in seconds.
-
 ### Usage:
 ```py
+
 import xRedUtils.times as times
 or
 from xRedUtils import times
 ```
 """
 
-import sys, typing
+import sys
 sys.dont_write_bytecode = True
-
-from .type_hints import  NUMBER, NUMBER_DICT
+from .annotations import NUMBER, Literal
 from .strings import pluralize, singularize
+from .general import TIME_UNITS
 
 __all__: tuple[str, ...] = (
-    "UNITS", "TIME_UNITS",
     "convert_to_seconds", "seconds_to_str", "str_to_seconds"
 )
 
-TIME_UNITS: NUMBER_DICT = {
-    "second": 1,
-    "minute": 60,
-    "hour": 3_600,
-    "day": 86_400,
-    "week": 604_800,
-    "month": 2_592_000,          # 30 days
-    "year": 31_536_000,          # actual 365 days
-    "decade": 315_532_800,
-    "century": 3_155_673_600,
-    "millenium": 31_556_908_800
-}
-
-OPTIONS = typing.Literal["second", "minute", "hour", "day", "week", "month", "year", "decade", "century", "millenium"]
+OPTIONS = Literal["second", "minute", "hour", "day", "week", "month", "year", "decade", "century", "millenium"]
 
 def convert_to_seconds(value: NUMBER, option: OPTIONS) -> NUMBER:
     """
@@ -72,8 +56,8 @@ def seconds_to_str(seconds: int, _sep: str = ", ") -> str:
     components: list[str] = []
 
     for unit in reversed(TIME_UNITS.keys()):
-        if seconds >= TIME_UNITS[unit]:
-            count, seconds = divmod(seconds, TIME_UNITS[unit])
+        if seconds >= TIME_UNITS.get(unit, 0):
+            count, seconds = divmod(seconds, TIME_UNITS.get(unit, 1))
             components.append(f"{count} {pluralize(unit) if count != 1 else unit}")
 
     return _sep.join(components) if components else "0 seconds"
@@ -94,6 +78,6 @@ def str_to_seconds(time_string: str, _sep: str = ", ") -> int:
 
     for comp in components:
         count, unit = comp.split(" ") or (0, "second")
-        total_seconds += int(count) * TIME_UNITS[singularize(unit)]
+        total_seconds += int(count) * TIME_UNITS.get(singularize(unit), 0)
 
     return total_seconds
