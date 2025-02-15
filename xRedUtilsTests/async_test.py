@@ -2,8 +2,9 @@
 Main async testing module
 """
 
-import sys, typing, traceback
+import sys, traceback
 sys.dont_write_bytecode = True
+from xRedUtilsAsync.annotations import Any, FunctionType
 
 def load_modules() -> list:
     from .loaders import (
@@ -29,20 +30,24 @@ def load_modules() -> list:
 
 async def main_test() -> None:
     for module in load_modules() or []:
+        
+        if (custom := getattr(module, "custom", None)):
+            await custom()
+        
         if not (tester := getattr(module, "tester", None)):
             continue
+            
+        for func, data in (tester(False) or dict()).items():
 
-        if tests := tester(True):
-            for func, data in (tests or dict()).items():
-                if not await runner(func, result=data.get("result"), *data.get("args", []), **data.get("kwargs", {})):
-                    print(f"Failed to run: {func.__qualname__}")
-                    print("--------------------------------")
+            if not await runner(func, result=data.get("result"), *data.get("args", []), **data.get("kwargs", {})):
+                print(f"Failed to run: {func.__qualname__}")
+                print("--------------------------------")
     else:
         print("All tests complete.")
 
-async def runner(f: typing.Callable, result: typing.Any, *args, **kwargs) -> bool:
+async def runner(f: FunctionType, result: Any, *args, **kwargs) -> bool:
     try:
-        response: typing.Any = await f(*args, **kwargs) 
+        response: Any = await f(*args, **kwargs) 
         
         if result == "*" or response == result:
             return True
@@ -51,6 +56,5 @@ async def runner(f: typing.Callable, result: typing.Any, *args, **kwargs) -> boo
 
     except Exception:
         traceback.print_exc()
-    return False
 
-# TODO: tests for regexes, general, errors?
+    return False

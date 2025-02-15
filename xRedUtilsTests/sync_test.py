@@ -2,8 +2,9 @@
 Main sync testing module
 """
 
-import sys, typing, traceback
+import sys, traceback
 sys.dont_write_bytecode = True
+from xRedUtils.annotations import Any, FunctionType
 
 def load_modules() -> list:
     from .loaders import (
@@ -15,7 +16,6 @@ def load_modules() -> list:
         funcs as test_funcs,
         paths as test_paths,
         general as test_general,
-        objects as test_objects,
         objects as test_objects,
         errors as test_errors,
         generators as test_generators,
@@ -30,20 +30,24 @@ def load_modules() -> list:
 
 def main_test() -> None:
     for module in load_modules() or []:
+        
+        if (custom := getattr(module, "custom", None)):
+            custom()
+        
         if not (tester := getattr(module, "tester", None)):
             continue
+            
+        for func, data in (tester(False) or dict()).items():
 
-        if tests := tester(False):
-            for func, data in (tests or dict()).items():
-                if not runner(func, result=data.get("result"), *data.get("args", []), **data.get("kwargs", {})):
-                    print(f"Failed to run: {func.__qualname__}")
-                    print("--------------------------------")
+            if not runner(func, result=data.get("result"), *data.get("args", []), **data.get("kwargs", {})):
+                print(f"Failed to run: {func.__qualname__}")
+                print("--------------------------------")
     else:
         print("All tests complete.")
 
-def runner(f: typing.Callable, result: typing.Any, *args, **kwargs) -> bool:
+def runner(f: FunctionType, result: Any, *args, **kwargs) -> bool:
     try:
-        response: typing.Any = f(*args, **kwargs) 
+        response: Any = f(*args, **kwargs) 
         
         if result == "*" or response == result:
             return True
@@ -54,5 +58,3 @@ def runner(f: typing.Callable, result: typing.Any, *args, **kwargs) -> bool:
         traceback.print_exc()
     
     return False
-
-# TODO: tests for regexes, general, errors?
