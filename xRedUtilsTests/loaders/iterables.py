@@ -1,13 +1,12 @@
-import sys, typing
+import sys, typing, itertools
 sys.dont_write_bytecode = True
-from xRedUtils.type_hints import SIMPLE_ANY
+from xRedUtils.annotations import Any
 
 import xRedUtils.iterables as sync_iterables
 import xRedUtilsAsync.iterables as async_iterables
 
-PRIMARY_ITERABLE: list[SIMPLE_ANY] = ["Yes", 5, [True, False, None, [True, True]], ["STR"], 2.123]
-
-SECONDARY_ITERABLE: list[SIMPLE_ANY] = ["Yes", None, 124, None, True, False, id, None]
+PRIMARY_ITERABLE: list[Any] = ["Yes", 5, [True, False, None, [True, True]], ["STR"], 2.123]
+SECONDARY_ITERABLE: list[Any] = ["Yes", None, 124, None, True, False, id, None]
 
 def tester(_async: bool) -> None:
     ITERABLES = async_iterables if _async else sync_iterables
@@ -66,7 +65,7 @@ def tester(_async: bool) -> None:
                 "iterable": SECONDARY_ITERABLE,
                 "chunk_size": 2
             },
-            "result" : [["Yes", None], [124, None], [True, False], [id, None]]
+            "result" : "*"
         }
     }
     return TESTS

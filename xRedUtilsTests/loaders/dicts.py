@@ -1,11 +1,11 @@
 import sys, typing, json
 sys.dont_write_bytecode = True
-from xRedUtils.type_hints import SIMPLE_ANY
+from xRedUtils.annotations import Any
 
 import xRedUtils.dicts as sync_dicts
 import xRedUtilsAsync.dicts as async_dicts
 
-PRIMARY_DICT: dict[str, SIMPLE_ANY] = {
+PRIMARY_DICT: dict[str, Any] = {
     "a": 1, 
     "b": {
         "b": 10, 
@@ -17,7 +17,7 @@ PRIMARY_DICT: dict[str, SIMPLE_ANY] = {
     "q": "14"
 }
 
-SECONDARY_DICT: dict[str, SIMPLE_ANY] = {
+SECONDARY_DICT: dict[str, Any] = {
     "a": 1, 
     "b": {
         "b": 10, 

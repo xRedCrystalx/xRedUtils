@@ -1,11 +1,9 @@
 import sys, typing
 sys.dont_write_bytecode = True
-from xRedUtils.type_hints import NUM_ITERABLE
-
 import xRedUtils.maths as sync_maths
 import xRedUtilsAsync.maths as async_maths
 
-NUBERS: NUM_ITERABLE = [1, 6, 4, 7, 2, 5, 7, 3, 6, 7, 2, 5, 7, 3, 6, 7, 0, 2, 3, 6, 9, 1, 3, 2]
+NUBERS: list[int] = [1, 6, 4, 7, 2, 5, 7, 3, 6, 7, 2, 5, 7, 3, 6, 7, 0, 2, 3, 6, 9, 1, 3, 2]
 
 def tester(_async: bool) -> None:
     MATHS = async_maths if _async else sync_maths
