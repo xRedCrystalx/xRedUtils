@@ -16,7 +16,7 @@ from xRedUtilsAsync import dates
 
 import sys, datetime, time
 sys.dont_write_bytecode = True
-from typing import Literal
+from .annotations import Literal
 
 __all__: tuple[str, ...] = (
     "get_datetime", "timestamp"
@@ -36,17 +36,17 @@ async def get_datetime(option: Literal["UTC"] | None = None) -> datetime.datetim
 
     return datetime.datetime.now()
 
-async def timestamp(dt: datetime.datetime) -> int:
+async def timestamp(dt: datetime.datetime = None) -> int:
     """
     Converts a datetime object to a UNIX timestamp.
 
     ### Parameters:
-    - `dt` - The `datetime` object to convert.
+    - `dt` - Optional `datetime` object to convert, otherwise current timestamp will be returned.
 
     ### Returns:
     - The UNIX timestamp corresponding to the input datetime in `int`.
     """
     if dt and isinstance(dt, datetime.datetime):
-        return int(datetime.datetime.timestamp(dt))
+        return int(dt.timestamp())
     
     return int(time.time())
