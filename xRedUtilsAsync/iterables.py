@@ -20,16 +20,16 @@ from xRedUtilsAsync import iterables
 ```
 """
 
-import sys
+import sys, itertools
 sys.dont_write_bytecode = True
-
-from .type_hints import SIMPLE_ANY, ITERABLE
+from .annotations import Any, ITERABLE
+from .errors import VersionMismatchError
 
 __all__: tuple[str, ...] = (
     "flatten_iterable", "remove_items", "remove_type", "compare_iterables", "count_occurrences", "get_attr_data", "chunker", "to_iterable"
 )
 
-async def flatten_iterable(iterable: ITERABLE) -> list[SIMPLE_ANY]:
+async def flatten_iterable(iterable: ITERABLE) -> list[Any]:
     """
     Flattens a iterable into a single level list.
 
@@ -49,16 +49,17 @@ async def flatten_iterable(iterable: ITERABLE) -> list[SIMPLE_ANY]:
     if not isinstance(iterable, ITERABLE):
         return iterable
 
-    new: list[SIMPLE_ANY] = []
+    new: list[Any] = list()
+
     for element in iterable:
         if isinstance(element, ITERABLE):
-            elements: list[SIMPLE_ANY] = await flatten_iterable(element)
+            elements: list[Any] = await flatten_iterable(element)
             new.extend(elements)
         else:
             new.append(element)
     return new
 
-async def remove_items(iterable: ITERABLE, item: SIMPLE_ANY) -> list[SIMPLE_ANY]:
+async def remove_items(iterable: ITERABLE, item: Any) -> list[Any]:
     """
     Removes all occurrences of a specified item from the iterable.
     
@@ -71,7 +72,7 @@ async def remove_items(iterable: ITERABLE, item: SIMPLE_ANY) -> list[SIMPLE_ANY]
     """
     return [element for element in iterable if element != item]
 
-async def remove_type(iterable: ITERABLE, obj: type) -> list[SIMPLE_ANY]:
+async def remove_type(iterable: ITERABLE, obj: type) -> list[Any]:
     """
     Removes all items of a specified type from the iterable.
     
@@ -84,7 +85,7 @@ async def remove_type(iterable: ITERABLE, obj: type) -> list[SIMPLE_ANY]:
     """
     return [element for element in iterable if not isinstance(element, obj)]
 
-async def compare_iterables(iterable1: ITERABLE, iterable2: ITERABLE) -> list[SIMPLE_ANY]:
+async def compare_iterables(iterable1: ITERABLE, iterable2: ITERABLE) -> list[Any]:
     """
     Compare two iterables and return a list of items that are present in both iterables.
     
@@ -97,7 +98,7 @@ async def compare_iterables(iterable1: ITERABLE, iterable2: ITERABLE) -> list[SI
     """
     return [item for item in iterable1 if item in iterable2]
 
-async def count_occurrences(iterable: ITERABLE, item: SIMPLE_ANY) -> int:
+async def count_occurrences(iterable: ITERABLE, item: Any) -> int:
     """
     Count the number of times a specific item occurs in an iterable.
 
@@ -110,7 +111,7 @@ async def count_occurrences(iterable: ITERABLE, item: SIMPLE_ANY) -> int:
     """
     return len([element for element in iterable if element == item])
 
-async def get_attr_data(iterable: ITERABLE, attr: str) -> list[SIMPLE_ANY]:
+async def get_attr_data(iterable: ITERABLE, attr: str) -> list[Any]:
     """
     Retrieves attribute data from each object in the iterable. If no attribute was found, ignores the `item`.
 
@@ -123,7 +124,7 @@ async def get_attr_data(iterable: ITERABLE, attr: str) -> list[SIMPLE_ANY]:
     """
     return [data if (data := getattr(item, attr, "_NO_ATTR")) != "_NO_ATTR" else item for item in iterable]
 
-async def chunker(iterable: ITERABLE, chunk_size: int) -> list[list[SIMPLE_ANY]]:
+async def chunker(iterable: ITERABLE, chunk_size: int, strict: bool = False) -> itertools.batched:
     """
     Slice `iterable` into chunks of specified size
     
@@ -134,12 +135,15 @@ async def chunker(iterable: ITERABLE, chunk_size: int) -> list[list[SIMPLE_ANY]]
     ### Returns:
     - List of lists (chunks).
     """
-    return [
-        iterable[i:i + chunk_size] 
-        for i in range(0, len(iterable), chunk_size)
-    ]
+    if strict and sys.version_info < (3, 13):
+        raise VersionMismatchError("Strict argument requires python 3.13+")
 
-async def to_iterable(data: SIMPLE_ANY, slice: bool = False) -> list[SIMPLE_ANY]:
+    elif strict:
+        return itertools.batched(iterable, chunk_size, strict=strict)
+    else:
+        return itertools.batched(iterable, chunk_size)
+
+async def to_iterable(data: Any, slice: bool = False) -> list[Any]:
     """
     Converts data into a list.
     

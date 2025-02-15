@@ -20,16 +20,16 @@ from xRedUtils import iterables
 ```
 """
 
-import sys
+import sys, itertools
 sys.dont_write_bytecode = True
-
-from .type_hints import SIMPLE_ANY, ITERABLE
+from .annotations import Any, ITERABLE
+from .errors import VersionMismatchError
 
 __all__: tuple[str, ...] = (
-    "flatten_iterable", "remove_items", "remove_type", "compare_iterables", "count_occurrences", "get_attr_data", "to_iterable", "chunker"
+    "flatten_iterable", "remove_items", "remove_type", "compare_iterables", "count_occurrences", "get_attr_data", "chunker", "to_iterable"
 )
 
-def flatten_iterable(iterable: ITERABLE) -> list[SIMPLE_ANY]:
+def flatten_iterable(iterable: ITERABLE) -> list[Any]:
     """
     Flattens a iterable into a single level list.
 
@@ -49,7 +49,8 @@ def flatten_iterable(iterable: ITERABLE) -> list[SIMPLE_ANY]:
     if not isinstance(iterable, ITERABLE):
         return iterable
 
-    new: list[SIMPLE_ANY] = []
+    new: list[Any] = list()
+   
     for element in iterable:
         if isinstance(element, ITERABLE):
             new.extend(flatten_iterable(element))
@@ -57,7 +58,7 @@ def flatten_iterable(iterable: ITERABLE) -> list[SIMPLE_ANY]:
             new.append(element)
     return new
 
-def remove_items(iterable: ITERABLE, item: SIMPLE_ANY) -> list[SIMPLE_ANY]:
+def remove_items(iterable: ITERABLE, item: Any) -> list[Any]:
     """
     Removes all occurrences of a specified item from the iterable.
     
@@ -70,7 +71,7 @@ def remove_items(iterable: ITERABLE, item: SIMPLE_ANY) -> list[SIMPLE_ANY]:
     """
     return [element for element in iterable if element != item]
 
-def remove_type(iterable: ITERABLE, obj: type) -> list[SIMPLE_ANY]:
+def remove_type(iterable: ITERABLE, obj: type) -> list[Any]:
     """
     Removes all items of a specified type from the iterable.
     
@@ -83,7 +84,7 @@ def remove_type(iterable: ITERABLE, obj: type) -> list[SIMPLE_ANY]:
     """
     return [element for element in iterable if not isinstance(element, obj)]
 
-def compare_iterables(iterable1: ITERABLE, iterable2: ITERABLE) -> list[SIMPLE_ANY]:
+def compare_iterables(iterable1: ITERABLE, iterable2: ITERABLE) -> list[Any]:
     """
     Compare two iterables and return a list of items that are present in both iterables.
     
@@ -96,7 +97,7 @@ def compare_iterables(iterable1: ITERABLE, iterable2: ITERABLE) -> list[SIMPLE_A
     """
     return [item for item in iterable1 if item in iterable2]
 
-def count_occurrences(iterable: ITERABLE, item: SIMPLE_ANY) -> int:
+def count_occurrences(iterable: ITERABLE, item: Any) -> int:
     """
     Count the number of times a specific item occurs in an iterable.
 
@@ -109,7 +110,7 @@ def count_occurrences(iterable: ITERABLE, item: SIMPLE_ANY) -> int:
     """
     return len([element for element in iterable if element == item])
 
-def get_attr_data(iterable: ITERABLE, attr: str) -> list[SIMPLE_ANY]:
+def get_attr_data(iterable: ITERABLE, attr: str) -> list[Any]:
     """
     Retrieves attribute data from each object in the iterable. If no attribute was found, ignores the `item`.
 
@@ -122,23 +123,31 @@ def get_attr_data(iterable: ITERABLE, attr: str) -> list[SIMPLE_ANY]:
     """
     return [data if (data := getattr(item, attr, "_NO_ATTR")) != "_NO_ATTR" else item for item in iterable]
 
-def chunker(iterable: ITERABLE, chunk_size: int) -> list[list[SIMPLE_ANY]]:
+def chunker(iterable: ITERABLE, chunk_size: int, strict: bool = False) -> itertools.batched:
     """
     Slice `iterable` into chunks of specified size
     
     ### Parameters:
     - `iterable` - Iterable that will be chunked.
     - `chunk_size` - Size/num of elements in each chunk.
+    - `strict` - If the final chunk can be shorter than `chunk_size`.
 
     ### Returns:
-    - List of lists (chunks).
-    """
-    return [
-        iterable[i:i + chunk_size] 
-        for i in range(0, len(iterable), chunk_size)
-    ]
+    - `batched` object ➜ iterable of tuples.
 
-def to_iterable(data: SIMPLE_ANY, slice: bool = False) -> list[SIMPLE_ANY]:
+    ### Raises:
+    - `TypeError` if the final chunk is shorter than `chunk_size`.
+    - `VersionMismatchError` if 
+    """
+    if strict and sys.version_info < (3, 13):
+        raise VersionMismatchError("Strict argument requires python 3.13+")
+
+    elif strict:
+        return itertools.batched(iterable, chunk_size, strict=strict)
+    else:
+        return itertools.batched(iterable, chunk_size)
+
+def to_iterable(data: Any, slice: bool = False) -> list[Any]:
     """
     Converts data into a list.
     
