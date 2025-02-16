@@ -23,4 +23,4 @@ DATE_PATTERN: re.Pattern[str] = re.compile(r"\d{4}-\d{2}-\d{2}") #YYYY-MM-DD
 
 IPv4_PATTERN: re.Pattern[str] = re.compile(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b")
 IPv6_PATTERN: re.Pattern[str] = re.compile(r"\b(?:\[?[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}\]?\b")
-MAC_ADDR_PATTERN: re.Pattern[str] = re.compile(r"([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})", re.IGNORECASE)
+MAC_ADDR_PATTERN: re.Pattern[str] = re.compile(r"\b(?:[0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}\b")
