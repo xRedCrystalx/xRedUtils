@@ -1,4 +1,4 @@
-import sys, typing, datetime, time
+import sys, typing, datetime
 sys.dont_write_bytecode = True
 
 import xRedUtils.dates as sync_dates
@@ -13,9 +13,9 @@ def tester(_async: bool) -> None:
         },
         DATES.timestamp: {
             "kwargs": {
-                "dt": datetime.datetime.now()
+                "dt": (dt := datetime.datetime.now())
             },
-            "result": int(time.time())
+            "result": int(dt.timestamp())
         }
     }
     return TESTS

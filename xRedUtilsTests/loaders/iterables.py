@@ -1,4 +1,4 @@
-import sys, typing, itertools
+import sys, typing, itertools, asyncio
 sys.dont_write_bytecode = True
 from xRedUtils.annotations import Any
 
@@ -60,12 +60,18 @@ def tester(_async: bool) -> None:
             },
             "result" : ["H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d", "!"]
         },
-        ITERABLES.chunker: {
-            "kwargs": {
-                "iterable": SECONDARY_ITERABLE,
-                "chunk_size": 2
-            },
-            "result" : "*"
-        }
     }
     return TESTS
+
+
+def sync_custom() -> None:
+    result = sync_iterables.chunker(SECONDARY_ITERABLE, 2)
+
+    if not isinstance(result, itertools.batched):
+        print("iterables.chunker did not return batched object. Returned:", result)
+
+async def async_custom() -> None:
+    result = await async_iterables.chunker(SECONDARY_ITERABLE, 2)
+
+    if not isinstance(result, itertools.batched):
+        print("iterables.chunker did not return batched object. Returned:", result)
