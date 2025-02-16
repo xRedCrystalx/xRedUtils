@@ -31,13 +31,13 @@ def load_modules() -> list:
 async def main_test() -> None:
     for module in load_modules() or []:
         
-        if (custom := getattr(module, "custom", None)):
+        if (custom := getattr(module, "async_custom", None)):
             await custom()
         
         if not (tester := getattr(module, "tester", None)):
             continue
             
-        for func, data in (tester(False) or dict()).items():
+        for func, data in (tester(True) or dict()).items():
 
             if not await runner(func, result=data.get("result"), *data.get("args", []), **data.get("kwargs", {})):
                 print(f"Failed to run: {func.__qualname__}")

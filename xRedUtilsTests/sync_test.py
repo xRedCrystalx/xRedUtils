@@ -8,30 +8,36 @@ from xRedUtils.annotations import Any, FunctionType
 
 def load_modules() -> list:
     from .loaders import (
-        dicts as test_dicts,
-        iterables as test_iterables,
+        cache as test_cache,
+        colors as test_colors,
         dates as test_dates,
-        maths as test_maths,
-        strings as test_strings,
-        funcs as test_funcs,
-        paths as test_paths,
-        general as test_general,
-        objects as test_objects,
+        dicts as test_dicts,
         errors as test_errors,
+        funcs as test_funcs,
+        general as test_general,
         generators as test_generators,
         hashing as test_hashing,
+        iterables as test_iterables,
+        maths as test_maths,
+        modules as test_modules,
+        objects as test_objects,
+        paths as test_paths,
+        regexes as test_regexes,
+        strings as test_strings,
+        times as test_times,
         type_converters as test_tconverters
     )
 
     return [
-        test_dicts, test_iterables, test_dates, test_maths, test_strings, test_funcs, test_paths,
-        test_general, test_objects, test_errors, test_generators, test_hashing, test_tconverters
+        test_cache, test_colors, test_dates, test_dicts, test_errors, test_funcs, test_general, test_generators,
+        test_hashing, test_iterables, test_maths, test_modules, test_objects, test_paths, test_regexes, test_strings,
+        test_times, test_tconverters
     ]
 
 def main_test() -> None:
     for module in load_modules() or []:
         
-        if (custom := getattr(module, "custom", None)):
+        if (custom := getattr(module, "sync_custom", None)):
             custom()
         
         if not (tester := getattr(module, "tester", None)):
